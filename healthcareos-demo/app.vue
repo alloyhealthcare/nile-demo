@@ -1,5 +1,9 @@
 <template>
   <div>
-    <NuxtWelcome />
+    <GlobalNavigation />
   </div>
 </template>
+
+<script setup>
+import GlobalNavigation from "./components/Navigation/GlobalNavigation.vue";
+</script>
