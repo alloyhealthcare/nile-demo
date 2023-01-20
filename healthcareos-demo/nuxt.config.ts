@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/supabase", "nuxt-headlessui"],
-  css: ["@fortawesome/fontawesome-svg-core/styles.css"],
+  css: ["@fortawesome/fontawesome-svg-core/styles.css", "@/assets/styles/main.css"],
   headlessui: {
     prefix: "Headless",
   },

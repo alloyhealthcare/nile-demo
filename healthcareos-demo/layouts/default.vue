@@ -1,9 +1,7 @@
 <template>
   <div class="h-screen">
     <GlobalNavigation />
-    <div class="container pt-6">
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>
 
