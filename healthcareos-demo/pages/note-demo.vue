@@ -1,7 +1,8 @@
 <template>
   <div>
-    <flow-navigation title="Now" context="Test" />
+    <flow-navigation title="Now" context="Test" class="mb-4" />
     <div class="flex flex-row gap-x-6 flex-grow">
+      <PatientSidebar :patient="{ name: 'Priscilla Edwards', mrn: 2, birthDate: 'February 12, 1983' }" />
       <div class="w-3/5 mx-auto">
         <div class="mb-6 border-b border-slate-200">
           <h2 class="mb-3 text-lg font-semibold">Vitals</h2>
@@ -28,6 +29,10 @@
             <vital-item-card :item="{ value: 98, vitalType: 'Sp02', unit: '%' }" />
           </div>
         </div>
+        <div class="mb-6">
+          <editor-content :editor="chiefComplaintDoc" class="tiptap-editor editor-container text-xl z-50" />
+        </div>
+
         <editor-content :editor="editor" class="tiptap-editor editor-container text-xl z-50" />
         <floating-menu
           :editor="editor"
@@ -230,6 +235,10 @@
             strike
           </button>
         </bubble-menu>
+
+        <div class="flex flex-row px-3 py-2 bg-white rounded-xl drop-shadow-xl absolute inset-x-0 bottom-0 mb-6 mr-6">
+          <button>Wrap Up</button>
+        </div>
       </div>
     </div>
   </div>
@@ -238,20 +247,34 @@
 <script setup>
 import VitalItemCard from "@/components/Cards/VitalItemCard.vue";
 import FlowNavigation from "@/components/Navigation/FlowNavigation.vue";
+import PatientSidebar from "~~/components/Sidebars/PatientSidebar.vue";
+
+// Tiptap
 import { useEditor, EditorContent, BubbleMenu, FloatingMenu } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import Mention from "@tiptap/extension-mention";
 import Placeholder from "@tiptap/extension-placeholder";
 
+// Initialize TipTap editor
+const chiefComplaintDoc = useEditor({
+  extensions: [StarterKit],
+  content: `<h2>Chief Complaint</h2><p><mark>This is a chief complaint.</mark></p>`,
+});
+
 const editor = useEditor({
-  content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
   extensions: [
     StarterKit,
     FloatingMenu,
     Mention,
     BubbleMenu,
     Placeholder.configure({
-      placeholder: "Begin typing...",
+      placeholder: ({ node }) => {
+        if (node.type.name === "heading") {
+          return "What’s the title?";
+        }
+
+        return "Starting typing or select a template...";
+      },
       emptyEditorClass: "is-editor-empty",
       emptyNodeClass: "my-custom-is-empty-class",
     }),
@@ -266,6 +289,11 @@ export default {
       editor: null,
       chiefComplaintDoc: null,
       item: null,
+      patient: {
+        name: "Priscilla",
+        mrn: 2,
+        birthDate: "May 2, 2012",
+      },
       // General Note Toolbar
       hpi: "HPI",
       exam: "Exam",
@@ -285,12 +313,31 @@ export default {
       variable: "variable ",
     };
   },
+  components: { PatientSidebar },
 };
 </script>
 
 <style>
 .ProseMirror {
   @apply focus:outline-none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  @apply text-slate-300;
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+}
+
+.ProseMirror p.is-empty::before {
+  @apply text-slate-300;
+  content: attr(data-placeholder);
+  float: left;
+
+  pointer-events: none;
+  height: 0;
 }
 
 .editor-container {
@@ -304,7 +351,7 @@ export default {
   }
 }
 .editor-toolbar {
-  @apply text-sm bg-gray-900 text-white rounded-lg flex flex-row overflow-hidden;
+  @apply text-sm bg-gray-900 text-white rounded-lg flex flex-row overflow-hidden ml-3;
   &::-webkit-scrollbar {
     display: none;
   }
