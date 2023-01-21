@@ -15,7 +15,7 @@
         <span>Progress Note</span>
       </div>
       <div>
-        <button><font-awesome-icon icon="fa-regular faTimes" /></button>
+        <button><font-awesome-icon icon="fa-regular fa-times" /></button>
       </div>
     </div>
   </div>

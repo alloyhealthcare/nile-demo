@@ -2,7 +2,7 @@
   <div>
     <flow-navigation title="Now" context="Test" />
     <div class="flex flex-row gap-x-6 flex-grow">
-      <div class="w-3/5">
+      <div class="w-3/5 mx-auto">
         <div class="mb-6 border-b border-slate-200">
           <h2 class="mb-3 text-lg font-semibold">Vitals</h2>
           <div class="flex flex-row mb-6 gap-x-2">
@@ -173,7 +173,7 @@
               </transition>
             </div>
             <button v-on:click="show = !show" class="bg-gray-900 rounded-lg subtoolbar-button">
-              <font-awesome-icon :icon="['far', 'chevron-right']" class="text-xs" />
+              <font-awesome-icon icon="fa-solid fa-chevron-right" class="text-xs" />
             </button>
           </div>
           <button
@@ -241,10 +241,21 @@ import FlowNavigation from "@/components/Navigation/FlowNavigation.vue";
 import { useEditor, EditorContent, BubbleMenu, FloatingMenu } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import Mention from "@tiptap/extension-mention";
+import Placeholder from "@tiptap/extension-placeholder";
 
 const editor = useEditor({
   content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
-  extensions: [StarterKit, FloatingMenu, Mention, BubbleMenu],
+  extensions: [
+    StarterKit,
+    FloatingMenu,
+    Mention,
+    BubbleMenu,
+    Placeholder.configure({
+      placeholder: "Begin typing...",
+      emptyEditorClass: "is-editor-empty",
+      emptyNodeClass: "my-custom-is-empty-class",
+    }),
+  ],
 });
 </script>
 
@@ -278,7 +289,13 @@ export default {
 </script>
 
 <style>
+.ProseMirror {
+  @apply focus:outline-none;
+}
+
 .editor-container {
+  @apply outline-none focus:outline-none focus:outline-0 active:outline-none;
+
   h2 {
     @apply font-semibold mt-4;
   }
@@ -308,5 +325,23 @@ export default {
       @apply hover:text-gray-400;
     }
   }
+}
+.showSubMenu-enter {
+  @apply w-0;
+}
+.showSubMenu-leave {
+  width: 508px;
+}
+.showSubMenu-enter-to {
+  width: 508px;
+}
+.showSubMenu-leave-to {
+  width: 0;
+}
+.showSubMenu-enter-active {
+  @apply transition-all duration-500;
+}
+.showSubMenu-leave-active {
+  @apply transition-all duration-500;
 }
 </style>
