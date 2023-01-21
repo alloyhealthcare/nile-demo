@@ -13,10 +13,9 @@ This repository is a static-site generator prototype for HealthcareOS. Built on 
 ### Under the Covers
 <ul>
 <li><strong>Framework</strong> Vue.js</li>
-<li><strong>Static Site Generator</strong> Gridsome</li>
-<li><strong>Database</strong> Airtable</li>
-<li><strong>Styling</strong> Tailwind via Windi.CSS</li>
-<li><strong>Component Library</strong> Vue-Tailwind</li>
+<li><strong>Vue Framework</strong> Nuxt</li>
+<li><strong>Database</strong> Supabase</li>
+<li><strong>Styling</strong> Tailwind</li>
 <li><strong>Editor</strong> TipTap</li>
-<li><strong>Hosting/Deployment</strong> Netlify</li>
+<li><strong>Hosting/Deployment</strong> Vercel</li>
 </ul>
