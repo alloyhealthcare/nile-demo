@@ -2,8 +2,6 @@
 
 ![github-healthcareOS-social](https://user-images.githubusercontent.com/67548487/183712961-b8d92d67-6c3c-4b30-903e-f1feb20d94a6.png)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d01c0f55-1454-4755-a743-94c035bc2fe3/deploy-status)](https://app.netlify.com/sites/healthcareos-demo/deploys)
-
 This is a prototype for <a href="https://www.alloy.health/healthcareos">HealthcareOS</a> a next-generation EHR from <a href="https://www.alloy.health/">Alloy Health</a>.
 
 ## About HealthcareOS
