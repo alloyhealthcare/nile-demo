@@ -11,6 +11,7 @@ import {
   faChevronRight,
   faSort,
   faCheck,
+  faArrowUpToLine,
 } from "@fortawesome/pro-solid-svg-icons";
 import {} from "@fortawesome/pro-light-svg-icons";
 import { far } from "@fortawesome/pro-regular-svg-icons";
@@ -19,7 +20,19 @@ config.autoAddCss = false;
 
 // You can add your icons directly in this plugin. See other examples for how you
 // can add other styles or just individual icons.
-library.add(fas, far, faBell, faArrowRight, faArrowLeft, faArrowDown, faTimes, faChevronRight, faSort, faCheck);
+library.add(
+  fas,
+  far,
+  faBell,
+  faArrowRight,
+  faArrowLeft,
+  faArrowDown,
+  faTimes,
+  faChevronRight,
+  faSort,
+  faCheck,
+  faArrowUpToLine
+);
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("font-awesome-icon", FontAwesomeIcon, {});

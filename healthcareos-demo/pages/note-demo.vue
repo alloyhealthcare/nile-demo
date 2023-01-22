@@ -237,45 +237,39 @@
         </bubble-menu>
 
         <div class="flex flex-row px-3 py-2 bg-white rounded-xl drop-shadow-xl absolute inset-x-0 bottom-0 mb-6 mr-6">
-          <Listbox v-model="selectedPerson">
-            <div class="relative mt-1">
-              <ListboxButton
-                class="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                <span class="block truncate">{{ selectedPerson.name }}</span>
-                <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                  <font-awesome-icon icon="fa-solid fa-sort" class="text-slate-400" aria-hidden="true" />
-                </span>
-              </ListboxButton>
-
-              <transition
-                leave-active-class="transition duration-100 ease-in"
-                leave-from-class="opacity-100"
-                leave-to-class="opacity-0">
-                <ListboxOptions
-                  class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  <ListboxOption
-                    v-slot="{ active, selected }"
-                    v-for="person in people"
-                    :key="person.name"
-                    :value="person"
-                    as="template">
-                    <li
+          <div class="flex flex-row space-x-2">
+            <Popover class="relative">
+              <PopoverButton
+                class="text-sm font-medium py-2 px-3 hover:bg-slate-200 rounded-md transition-all duraiton-150">
+                <font-awesome-icon icon="fa-regular fa-arrow-up-to-line" class="mr-2" />Add Template
+              </PopoverButton>
+              <PopoverPanel class="absolute z-10 bottom-12 bg-white rounded-md w-full flex flex-col p-4 space-y-3">
+                <span class="p-2">Template 1</span><span class="p-2">Template 2</span><span class="p-2">Template 3</span
+                ><span class="p-2">Template 4</span><span class="p-2">Template 5</span>
+              </PopoverPanel>
+            </Popover>
+            <div class="relative">
+              <Listbox v-model="selectedTemplate">
+                <ListboxButton
+                  class="text-sm font-medium py-2 px-3 hover:bg-slate-200 rounded-md transition-all duraiton-150">
+                  <font-awesome-icon icon="fa-regular fa-arrow-up-to-line" class="mr-2" />Add Template</ListboxButton
+                >
+                <ListboxOptions class="absolute z-10 bottom-12 bg-white rounded-md w-full flex flex-col p-4 space-y-3">
+                  <ListboxOption v-for="note in noteTemplate" :key="note.id" :value="note" :disabled="note.unavailable">
+                    <a
                       :class="[
                         active ? 'bg-amber-100 text-amber-900' : 'text-gray-900',
                         'relative cursor-default select-none py-2 pl-10 pr-4',
-                      ]">
-                      <span :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']">{{
-                        person.name
-                      }}</span>
-                      <span v-if="selected" class="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                        <font-awesome-icon icon="fa-regular fa-check" aria-hidden="true" />
-                      </span>
-                    </li>
+                      ]"
+                      >{{ note.name }}</a
+                    >
                   </ListboxOption>
                 </ListboxOptions>
-              </transition>
+              </Listbox>
             </div>
-          </Listbox>
+            <button>Diagnose</button>
+            <button>Create Order</button>
+          </div>
           <button>Wrap Up</button>
         </div>
       </div>
@@ -284,11 +278,13 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import VitalItemCard from "@/components/Cards/VitalItemCard.vue";
 import FlowNavigation from "@/components/Navigation/FlowNavigation.vue";
 import PatientSidebar from "~~/components/Sidebars/PatientSidebar.vue";
 
-import { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption } from "@headlessui/vue";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
+import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from "@headlessui/vue";
 
 // Tiptap
 import { useEditor, EditorContent, BubbleMenu, FloatingMenu } from "@tiptap/vue-3";
@@ -322,8 +318,14 @@ const editor = useEditor({
   ],
 });
 
-const people = ["Durward Reynolds", "Kenton Towne", "Therese Wunsch", "Benedict Kessler", "Katelyn Rohan"];
-const selectedPerson = ref(people[0]);
+const noteTemplate = [
+  { id: 1, name: "Durward Reynolds", unavailable: false },
+  { id: 2, name: "Kenton Towne", unavailable: false },
+  { id: 3, name: "Therese Wunsch", unavailable: false },
+  { id: 4, name: "Benedict Kessler", unavailable: true },
+  { id: 5, name: "Katelyn Rohan", unavailable: false },
+];
+const selectedTemplate = ref(noteTemplate[0]);
 const query = ref("");
 </script>
 
