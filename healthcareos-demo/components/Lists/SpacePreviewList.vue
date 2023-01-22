@@ -12,7 +12,7 @@
         :appointmentTime="item.encounter_time"
         variant="tertiary"
         :path="'/'"
-        :itemHeading="item.Patient"
+        :itemHeading="item.patient.name"
         :status="item.encounter_status" />
       <button to="">+{{ l - n }} More</button>
     </div>

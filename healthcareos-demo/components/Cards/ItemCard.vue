@@ -1,6 +1,6 @@
 <template>
-  <a
-    class="p-4 leading-none rounded-2xl bg-white/50 border border-transparent transition hover:shadow hover:bg-white/100 hover:shadow-slate-900/10 hover:border-slate-200 flex flex-row items-center justify-between"
+  <NuxtLink
+    class="p-4 leading-none rounded-2xl bg-white/70 border border-transparent transition hover:shadow hover:bg-white/100 hover:shadow-slate-900/10 hover:border-slate-200 flex flex-row items-center justify-between"
     :exact-active-class="'bg-white/100 shadow shadow-slate-900/10'"
     :active-class="'opacity-100'"
     :to="path">
@@ -41,7 +41,7 @@
     <div class="currentItem">
       <font-awesome-icon icon="fa-regular fa-arrow-right" class="text-slate-400" />
     </div>
-  </a>
+  </NuxtLink>
 </template>
 
 <script>
