@@ -2,7 +2,7 @@
   <div
     class="sticky top-0 z-50 flex items-stretch w-full px-8 space-x-4 bg-white border border-gray-200 divide-gray-200 navigation drop-shadow">
     <div class="border-r border-gray-300 border-solid pr-4 flex items-center">
-      <a tag="router-link" href="/launchpad/" :to="{ path: '/' }" class="">
+      <a tag="router-link" href="/" :to="{ path: '/' }" class="">
         <svg width="50" height="20" viewBox="0 0 49 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M1.50562 14.4045C0.501873 13.2809 0 11.8127 0 10C0 8.18727 0.501873 6.72659 1.50562 5.61798C2.52434 4.49438 3.78277 3.93258 5.2809 3.93258C6.28464 3.93258 7.19101 4.23221 8 4.83146C8.34457 5.11611 8.6367 5.41573 8.8764 5.73034H8.98876V4.26966H12.1348V15.7303H8.98876V14.2697H8.8764C8.6367 14.5843 8.34457 14.8839 8 15.1685C7.19101 15.7678 6.28464 16.0674 5.2809 16.0674C3.78277 16.0674 2.52434 15.5131 1.50562 14.4045ZM4.04494 7.52809C3.5206 8.12734 3.25843 8.95131 3.25843 10C3.25843 11.0487 3.5206 11.8727 4.04494 12.4719C4.56929 13.0712 5.24345 13.3708 6.06742 13.3708C6.93633 13.3708 7.64045 13.0787 8.17978 12.4944C8.7191 11.8951 8.98876 11.0637 8.98876 10C8.98876 8.93633 8.7191 8.11236 8.17978 7.52809C7.64045 6.92884 6.93633 6.62921 6.06742 6.62921C5.24345 6.62921 4.56929 6.92884 4.04494 7.52809Z"
@@ -36,7 +36,7 @@
     <div class="flex-grow h-full pr-4 border-r border-gray-300 rounded-lg"></div>
 
     <div class="items-center px-5 py-2 border-r border-gray-300">
-      <font-awesome-icon icon="fa-solid fa-bell" class="text-slate-500" />
+      <font-awesome-icon icon="fas fa-bell" class="text-slate-500" />
     </div>
 
     <div class="flex items-center">

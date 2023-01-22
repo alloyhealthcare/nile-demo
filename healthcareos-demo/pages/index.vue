@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="w-4/5 mx-auto">
     <div class="mt-14">
-      <h1 class="mb-4 text-3xl md:text-2xl leading-none">Welcome back, Dr. Cooper</h1>
+      <h1 class="mb-3 text-3xl md:text-2xl leading-none">Welcome back, Dr. Cooper</h1>
       <div class="mb-12 text-2xl lg:mb-6 grid-header md:text-lg space-x-1">
         <h2 class="inline">Today is</h2>
         <h2 class="inline font-semibold">
@@ -18,7 +18,6 @@
           <space-preview-list :items="appointments" :n="2" :l="21" />
           <space-preview-list :items="appointments" :n="2" :l="21" />
         </div>
-        {{ appointmentNum }}
       </div>
     </div>
   </div>
@@ -33,7 +32,10 @@ const client = useSupabaseClient();
 
 // Encounters
 const { data: appointments } = await useAsyncData("encounters", async () => {
-  const { data } = await client.from("encounters").select("*", { count: "exact", head: false });
+  const { data } = await client
+    .from("encounters")
+    .select("*", { count: "exact", head: false })
+    .order("encounter_time", { ascending: true });
   return data;
 });
 

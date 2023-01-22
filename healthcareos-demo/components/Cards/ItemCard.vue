@@ -1,6 +1,6 @@
 <template>
   <a
-    class="p-4 leading-none rounded-2xl bg-white/35 border border-transparent transition hover:shadow hover:bg-white/100 hover:shadow-slate-900/10 hover:border-slate-200 flex flex-row items-center justify-between"
+    class="p-4 leading-none rounded-2xl bg-white/50 border border-transparent transition hover:shadow hover:bg-white/100 hover:shadow-slate-900/10 hover:border-slate-200 flex flex-row items-center justify-between"
     :exact-active-class="'bg-white/100 shadow shadow-slate-900/10'"
     :active-class="'opacity-100'"
     :to="path">
@@ -11,12 +11,12 @@
       <div v-if="item_type != 'message'">
         <div class="flex flex-row items-baseline space-x-3 leading-none">
           <div class="text-xs font-semibold flex flex-row gap-x-1 text-slate-500 items-center">
-            <font-awesome-icon icon="fa-solid fa-clock" size="sm" v-if="item_type == 'appointment'" />
+            <font-awesome-icon icon="fa-solid fa-clock" v-if="item_type == 'appointment'" />
             <div v-if="isNow || isNext">
               <span v-if="isNow">Now</span>
               <span v-if="isNext">Next</span>
             </div>
-            <span v-else>{{ appointmentTime }} </span>
+            <span v-else>{{ $dayjs(appointmentTime, "HH:mm:ss").format("h:mm A") }} </span>
           </div>
           <div v-if="item_type === 'appointment'" class="flex flex-row space-x-3">
             <div class="text-xs" :class="[isCheckedIn ? 'text-blue-600' : 'text-slate-400']" v-if="status">
@@ -29,7 +29,7 @@
           </div>
           <div v-if="item_type === 'order'" class="flex flex-row space-x-3">
             <div class="text-xs" :class="[orderStatus ? 'text-blue-600' : 'text-slate-400']">
-              <font-awesome-icon :icon="['far', 'check-circle']" class="mr-0.5" />
+              <font-awesome-icon icon="fa-regular fa-circle-check" class="mr-0.5" />
               {{ status }}
             </div>
           </div>
@@ -59,8 +59,8 @@ export default {
       isCheckedIn: this.status != "No Status",
       isRoomed: this.status === "Roomed",
       orderStatus: this.status === "Filled",
-      isNow: this.appointmentTime == "8:30 AM",
-      isNext: this.appointmentTime == "8:45 AM",
+      isNow: this.appointmentTime === "08:30:00",
+      isNext: this.appointmentTime == "08:45:00",
     };
   },
   computed: {
