@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="landing">
-    <div class="mx-auto h-[400px] w-[500px] p-0.5 bg-slate-200/10 rounded-[14px] backdrop-blur-[144px]">
+    <div class="mx-auto h-[300px] w-[500px] p-0.5 bg-slate-200/10 rounded-[14px] backdrop-blur-[144px]">
       <div
         class="bg-white/90 py-9 outline-offset-0 rounded-xl flex items-center place-content-center flex-col h-full w-full">
         <svg

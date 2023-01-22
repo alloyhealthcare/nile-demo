@@ -36,7 +36,7 @@
     <div class="flex-grow h-full pr-4 border-r border-gray-300 rounded-lg"></div>
 
     <div class="items-center px-5 py-2 border-r border-gray-300">
-      <font-awesome-icon icon="fa-solid fa-bell" size="md" class="text-slate-500" />
+      <font-awesome-icon icon="fa-solid fa-bell" class="text-slate-500" />
     </div>
 
     <div class="flex items-center">

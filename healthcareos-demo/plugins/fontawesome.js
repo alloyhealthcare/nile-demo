@@ -12,6 +12,9 @@ import {
   faSort,
   faCheck,
   faArrowUpToLine,
+  faChartPieSimple,
+  faPrescription,
+  faSignature,
 } from "@fortawesome/pro-solid-svg-icons";
 import {} from "@fortawesome/pro-light-svg-icons";
 import { far } from "@fortawesome/pro-regular-svg-icons";
@@ -31,7 +34,10 @@ library.add(
   faChevronRight,
   faSort,
   faCheck,
-  faArrowUpToLine
+  faArrowUpToLine,
+  faChartPieSimple,
+  faPrescription,
+  faSignature
 );
 
 export default defineNuxtPlugin((nuxtApp) => {
