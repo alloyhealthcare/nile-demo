@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 flex-grow">{{ thisAppointment.patient.name }}</div>
+  <div class="p-6 flex-grow">Test{{ $route.params.id }} {{ thisAppointment.encounter_date }}</div>
 </template>
 
 <script setup>
