@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row flex-grow">
     <space-sidebar title="Appointments" meta="17 Appointments">
-      <template slot="sidebarList">
+      <template #sidebarList>
         <item-card
           v-for="appointment in appointments"
           :key="appointment.encounter_id"
@@ -13,7 +13,7 @@
           :status="appointment.encounter_status"
       /></template>
     </space-sidebar>
-    <div class="p-6 flex-grow">Test{{ $route.params.id }}</div>
+    <div class="p-6 flex-grow"><NuxtPage /></div>
   </div>
 </template>
 
