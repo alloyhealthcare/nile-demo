@@ -71,7 +71,10 @@ const badgeSize = {
 }
 
 .secondary {
-  @apply bg-slate-200 text-slate-600;
+  @apply text-slate-600;
+  &.solid {
+    @apply bg-slate-200 text-slate-800 py-1 px-2;
+  }
 }
 
 .default {
