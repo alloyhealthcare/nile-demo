@@ -8,10 +8,12 @@
       :secondaryButton="{ path: '/intake/vitals', text: 'Review' }"
       :tertiaryButton="{ path: '/note', text: 'Begin' }" />
   </div>
+  <h-badge variant="primary" :solid="true" size="large">Badge</h-badge>
 </template>
 
 <script setup>
 import PatientOverviewModule from "~/components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue";
+import HBadge from "~/components/Badges/HBadge.vue";
 
 const route = useRoute();
 const id = route.params.id;

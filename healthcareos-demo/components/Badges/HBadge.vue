@@ -1,12 +1,13 @@
 <template>
   <div
-    class="py-1 px-2 rounded-full flex flex-row items-center font-medium text-xs leading-none"
+    class="rounded-full flex flex-row items-center font-medium text-xs leading-none"
     :class="{
       primary: badgeVariant.primary,
       default: badgeVariant.default,
       secondary: badgeVariant.secondary,
       success: badgeVariant.success,
       solid: badgeStyle.solid,
+      large: badgeSize.large,
     }">
     <font-awesome-icon :icon="icon" v-if="icon" class="h-3 mr-1" />
     <slot />
@@ -22,6 +23,10 @@ const props = defineProps({
   solid: {
     type: Boolean,
     default: false,
+  },
+  size: {
+    type: String,
+    default: "default",
   },
   icon: {
     type: String,
@@ -39,19 +44,30 @@ const badgeVariant = {
 const badgeStyle = {
   solid: props.solid === true,
 };
+
+const badgeSize = {
+  large: props.size === "large",
+};
 </script>
 
 <style lang="scss" scoped>
+.large {
+  @apply text-base;
+}
 .primary {
   @apply text-blue-500;
 
   &.solid {
-    @apply bg-blue-100 text-blue-600;
+    @apply bg-blue-100 text-blue-600 py-1 px-2;
   }
 }
 
 .success {
   @apply bg-emerald-500 text-white hover:bg-emerald-600;
+
+  &.solid {
+    @apply bg-emerald-100 text-emerald-600 py-1 px-2;
+  }
 }
 
 .secondary {
