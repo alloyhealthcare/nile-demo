@@ -31,7 +31,7 @@ const variant = {
 };
 </script>
 
-<style>
+<style scoped>
 .primary {
   @apply bg-blue-500 text-white hover:bg-blue-600;
 }

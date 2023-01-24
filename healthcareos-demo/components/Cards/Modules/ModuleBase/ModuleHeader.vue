@@ -6,13 +6,15 @@
     <span>
       {{ headerSubTitle }}
     </span>
+    <h-badge variant="primary" icon="fa-check-circle">Test Text</h-badge>
   </div>
 </template>
 
 <script>
+import HBadge from "~~/components/Buttons/HBadge.vue";
 export default {
   name: "ModuleHeader",
-  components: {},
+  components: { HBadge },
   props: {
     headerTitle: String,
     headerSubTitle: String,

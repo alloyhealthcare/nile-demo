@@ -12,7 +12,7 @@
 
 <script setup>
 import PatientOverviewModule from "~/components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue";
-import HButton from "~/components/Buttons/HButton.vue";
+
 const route = useRoute();
 const id = route.params.id;
 
