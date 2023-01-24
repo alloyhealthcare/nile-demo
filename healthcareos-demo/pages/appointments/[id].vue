@@ -1,8 +1,18 @@
 <template>
-  <div class="p-6 flex-grow">{{ thisAppointment.patient.name }}</div>
+  <div class="p-6 flex-grow">
+    <patient-overview-module
+      :moduleInfo="{ title: 'Now', subTitle: thisAppointment.room }"
+      :patient="thisAppointment.patient"
+      :encounter="thisAppointment"
+      :primaryButton="{ path: '/intake/vitals', text: 'Review' }"
+      :secondaryButton="{ path: '/intake/vitals', text: 'Review' }"
+      :tertiaryButton="{ path: '/note', text: 'Begin' }" />
+  </div>
 </template>
 
 <script setup>
+import PatientOverviewModule from "~/components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue";
+import HButton from "~/components/Buttons/HButton.vue";
 const route = useRoute();
 const id = route.params.id;
 
@@ -11,7 +21,7 @@ const client = useSupabaseClient();
 const { data: appointments } = await useAsyncData("encounters", async () => {
   const { data } = await client
     .from("encounters")
-    .select(`*, patient(name)`, { count: "exact", head: false })
+    .select(`*, patient(*)`, { count: "exact", head: false })
     .order("encounter_time", { ascending: true });
   return data;
 });
