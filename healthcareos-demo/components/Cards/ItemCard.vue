@@ -9,7 +9,7 @@
         <span class="text-base font-medium leading-none">{{ itemHeading }}</span>
       </div>
       <div v-if="item_type != 'message'">
-        <div class="flex flex-row items-baseline space-x-3 leading-none">
+        <div class="flex flex-row space-x-3 leading-none items-center">
           <div class="text-xs font-semibold flex flex-row gap-x-1 text-slate-500 items-center">
             <font-awesome-icon icon="fa-solid fa-clock" v-if="item_type == 'appointment'" />
             <div v-if="isNow || isNext">
