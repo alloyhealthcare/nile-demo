@@ -1,7 +1,7 @@
 <template>
   <div
-    class="sticky top-0 z-50 flex items-stretch w-full px-8 space-x-4 bg-white border border-gray-200 divide-gray-200 navigation drop-shadow">
-    <div class="border-r border-gray-300 border-solid pr-4 flex items-center">
+    class="sticky top-0 z-50 flex items-stretch w-full px-8 bg-white border border-gray-200 divide-gray-200 navigation drop-shadow">
+    <div class="border-r border-gray-300 border-solid pr-4 flex items-center mr-4">
       <a tag="router-link" href="/" :to="{ path: '/' }" class="">
         <svg width="50" height="20" viewBox="0 0 49 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -33,9 +33,23 @@
       </div>
     </div>
 
-    <div class="flex-grow h-full pr-4 border-r border-gray-300 rounded-lg"></div>
+    <Popover class="relative flex-grow h-full border-r border-slate-300 mr-4">
+      <PopoverButton class="flex flex-row h-full items-center space-x-2 px-4"
+        >Test <NuxtLink to="/">Today</NuxtLink>
+        <div>{{ currentPage }}</div></PopoverButton
+      >
+      <TransitionRoot
+        enter="transition-opacity duration-75"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="transition-opacity duration-150"
+        leave-from="opacity-100"
+        leave-to="opacity-0">
+        <PopoverPanel class="absolute min-h-[300px] bg-white rounded-b-xl shadow-md p-4 w-full">Test</PopoverPanel>
+      </TransitionRoot>
+    </Popover>
 
-    <div class="items-center px-5 py-2 border-r border-gray-300">
+    <div class="items-center px-5 py-2 border-r border-gray-300 mr-4">
       <font-awesome-icon icon="fas fa-bell" class="text-slate-500" />
     </div>
 
@@ -117,13 +131,28 @@
 </template>
 
 <script setup>
-import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import {
+  Menu,
+  MenuButton,
+  MenuItems,
+  MenuItem,
+  PopoverButton,
+  PopoverPanel,
+  Popover,
+  TransitionRoot,
+} from "@headlessui/vue";
 </script>
 
 <script>
 export default {
   name: "Navigation",
-  components: {},
+  components: { PopoverButton, PopoverPanel },
+  props: {
+    currentPage: {
+      type: String,
+      default: "Dashboard",
+    },
+  },
   data() {
     return {
       todayTime: "",
