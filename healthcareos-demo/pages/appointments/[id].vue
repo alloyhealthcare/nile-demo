@@ -15,6 +15,12 @@
 import PatientOverviewModule from "~/components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue";
 import HBadge from "~/components/Badges/HBadge.vue";
 
+// const props = defineProps({
+//   thisAppointment: {
+//     type: Object,
+//   },
+// });
+
 const route = useRoute();
 const id = route.params.id;
 
@@ -29,4 +35,6 @@ const { data: appointments } = await useAsyncData("encounters", async () => {
 });
 
 const thisAppointment = appointments.value.find((appointments) => appointments.encounter_id == id);
+
+const appointment = useState("thisPatient", () => thisAppointment.patient);
 </script>

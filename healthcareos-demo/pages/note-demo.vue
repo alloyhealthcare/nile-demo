@@ -469,7 +469,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .ProseMirror {
   @apply focus:outline-none;
 }

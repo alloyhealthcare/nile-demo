@@ -35,7 +35,7 @@
           </div>
           <div class="w-1/2">
             <div class="text-sm font-semibold text-slate-500 mb-4">Last Appointment</div>
-            <a class="p-2.5 rounded-md border border-slate-200 w-full block flex flex-col gap-y-0.5">
+            <a class="p-2.5 rounded-md border border-slate-200 w-full flex flex-col gap-y-0.5">
               <span class="font-semibold text-sm">12 Apr 2020</span>
               <span class="text-sm">Follow Up</span>
             </a>

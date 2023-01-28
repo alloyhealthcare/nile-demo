@@ -32,23 +32,30 @@
         {{ todayTime }}
       </div>
     </div>
-
-    <Popover class="relative flex-grow h-full border-r border-slate-300 mr-4">
-      <PopoverButton class="flex flex-row h-full items-center space-x-2 px-4"
-        >Test <NuxtLink to="/">Today</NuxtLink>
-        <div>{{ currentPage }}</div></PopoverButton
-      >
-      <TransitionRoot
-        enter="transition-opacity duration-75"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="transition-opacity duration-150"
-        leave-from="opacity-100"
-        leave-to="opacity-0">
-        <PopoverPanel class="absolute min-h-[300px] bg-white rounded-b-xl shadow-md p-4 w-full">Test</PopoverPanel>
-      </TransitionRoot>
-    </Popover>
-
+    <div class="flex-grow flex flex-row items-center relative space-x-4 border-r border-slate-200">
+      <Popover class="h-full">
+        <PopoverButton class="flex flex-row h-full items-center space-x-2 px-4"
+          ><font-awesome-icon icon="fa-solid fa-grid-2" />
+        </PopoverButton>
+        <transition
+          enter-active-class="transition-all duration-100 ease-out"
+          enter-from-class="h-0"
+          enter-to-class="h-full"
+          leave-active-class="transition-all duration-100"
+          leave-from-class="h-full"
+          leave-to-class="h-0">
+          <PopoverPanel
+            class="absolute bg-white border-b border-r border-l border-slate-200 rounded-b-xl shadow-md p-4 w-full overflow-hidden"
+            >Test</PopoverPanel
+          >
+        </transition>
+      </Popover>
+      <div class="flex flex-row text-sm items-center space-x-2">
+        <NuxtLink :to="page.path" class="bg-slate-100 py-1 px-2 rounded-md" v-for="page in pages" :key="page.index">{{
+          page.name
+        }}</NuxtLink>
+      </div>
+    </div>
     <div class="items-center px-5 py-2 border-r border-gray-300 mr-4">
       <font-awesome-icon icon="fas fa-bell" class="text-slate-500" />
     </div>
@@ -131,28 +138,21 @@
 </template>
 
 <script setup>
-import {
-  Menu,
-  MenuButton,
-  MenuItems,
-  MenuItem,
-  PopoverButton,
-  PopoverPanel,
-  Popover,
-  TransitionRoot,
-} from "@headlessui/vue";
+import { Menu, MenuButton, MenuItems, MenuItem, PopoverButton, PopoverPanel, Popover } from "@headlessui/vue";
+
+const props = defineProps({
+  pages: {
+    type: Array,
+    default: [{ name: "Today", path: "/", index: 0 }],
+  },
+});
 </script>
 
 <script>
 export default {
   name: "Navigation",
   components: { PopoverButton, PopoverPanel },
-  props: {
-    currentPage: {
-      type: String,
-      default: "Dashboard",
-    },
-  },
+  props: {},
   data() {
     return {
       todayTime: "",

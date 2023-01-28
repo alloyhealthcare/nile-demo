@@ -3,6 +3,10 @@ module.exports = {
   content: [],
   theme: {
     extend: {
+      transitionProperty: {
+        height: "height",
+        spacing: "margin, padding",
+      },
       container: {
         center: true,
         padding: {

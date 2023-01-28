@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :thisPage="'Appointments'">
+  <NuxtLayout :pages="pages">
     <div class="flex flex-row flex-grow">
       <space-sidebar title="Appointments" meta="17 Appointments">
         <template #sidebarList>
@@ -56,8 +56,25 @@ const client = useSupabaseClient();
 const { data: appointments } = await useAsyncData("encounters", async () => {
   const { data } = await client
     .from("encounters")
-    .select(`*, patient(name)`, { count: "exact", head: false })
+    .select(`*, patient(*)`, { count: "exact", head: false })
     .order("encounter_time", { ascending: true });
   return data;
 });
+
+// const subpage = appointments.value.find((appointments) => appointments.encounter_id == id);
+
+const useAppointment = useState("thisPatient");
+
+const pages = [
+  {
+    name: "Today",
+    path: "/",
+    index: 0,
+  },
+  {
+    name: "Appointments",
+    path: "/appointments",
+    index: 1,
+  },
+];
 </script>

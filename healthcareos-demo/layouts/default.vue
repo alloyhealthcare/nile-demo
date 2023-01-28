@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex flex-col">
-    <GlobalNavigation :current-page="thisPage" />
+    <GlobalNavigation :pages="pages" />
     <slot />
   </div>
 </template>
@@ -9,9 +9,8 @@
 import GlobalNavigation from "../components/Navigation/GlobalNavigation.vue";
 
 const props = defineProps({
-  thisPage: {
-    type: String,
-    required: true,
+  pages: {
+    type: Array,
   },
 });
 </script>
