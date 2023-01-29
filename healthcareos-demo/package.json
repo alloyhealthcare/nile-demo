@@ -35,6 +35,7 @@
     "dayjs": "^1.11.7",
     "luxon": "^3.2.1",
     "tippy.js": "^6.3.7",
-    "vue-luxon": "^0.10.0"
+    "vue-luxon": "^0.10.0",
+    "vue3-easy-data-table": "^1.5.29"
   }
 }
