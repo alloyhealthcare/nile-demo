@@ -14,6 +14,9 @@
     "nuxt-headlessui": "^1.1.1",
     "sass": "^1.57.1"
   },
+  "overrides": {
+    "vue": "latest"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
@@ -25,6 +28,7 @@
     "@fortawesome/pro-thin-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
     "@nathanchase/nuxt-dayjs-module": "^1.0.11",
+    "@pinia/nuxt": "^0.4.6",
     "@tiptap/extension-bubble-menu": "^2.0.0-beta.209",
     "@tiptap/extension-floating-menu": "^2.0.0-beta.209",
     "@tiptap/extension-mention": "^2.0.0-beta.209",
@@ -34,6 +38,7 @@
     "@tiptap/vue-3": "^2.0.0-beta.209",
     "dayjs": "^1.11.7",
     "luxon": "^3.2.1",
+    "pinia": "^2.0.29",
     "tippy.js": "^6.3.7",
     "vue-luxon": "^0.10.0",
     "vue3-easy-data-table": "^1.5.29"

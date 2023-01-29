@@ -50,6 +50,10 @@
 import SpacePreviewList from "../components/Lists/SpacePreviewList.vue";
 import ItemCard from "../components/Cards/ItemCard.vue";
 
+import { useAppointmentStore } from "~/stores/appointments.ts";
+
+const todayAppointments = useAppointmentStore();
+
 // Call Data from Supabase
 const client = useSupabaseClient();
 

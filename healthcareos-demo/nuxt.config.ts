@@ -10,7 +10,13 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/supabase", "nuxt-headlessui", "@nathanchase/nuxt-dayjs-module"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/supabase",
+    "nuxt-headlessui",
+    "@nathanchase/nuxt-dayjs-module",
+    "@pinia/nuxt",
+  ],
   css: ["@fortawesome/fontawesome-svg-core/styles.css", "@/assets/styles/main.css"],
   headlessui: {
     prefix: "Headless",
