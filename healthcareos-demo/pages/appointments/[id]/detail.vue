@@ -1,5 +1,5 @@
 <template>
-  {{ appointment.patient.name }}
+  <div>Test {{ route.params.id }}</div>
 </template>
 
 <script setup>

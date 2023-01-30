@@ -23,7 +23,7 @@
                   v-for="appointment in appointments"
                   :key="appointment.encounter_id"
                   item_type="appointment"
-                  :appointmentTime="appointment.encounter_time"
+                  :subHeading="appointment.encounter_time"
                   variant="tertiary"
                   :path="'/appointments/' + appointment.encounter_id"
                   :itemHeading="appointment.patient.name"

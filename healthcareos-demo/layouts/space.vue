@@ -8,7 +8,7 @@
             v-for="item in items"
             :key="item.id"
             item_type="appointment"
-            :appointmentTime="item.subHeading"
+            :subHeading="item.subHeading"
             variant="tertiary"
             :path="'/appointments/' + item.id"
             :itemHeading="item.heading"
@@ -56,7 +56,6 @@ const props = defineProps({
   items: {
     type: Array,
   },
-
   pages: {
     type: Array,
   },

@@ -16,7 +16,7 @@
               <span v-if="isNow">Now</span>
               <span v-if="isNext">Next</span>
             </div>
-            <span v-else>{{ $dayjs(appointmentTime, "HH:mm:ss").format("h:mm A") }} </span>
+            <span v-else>{{ $dayjs(subHeading, "HH:mm:ss").format("h:mm A") }} </span>
           </div>
           <div v-if="item_type === 'appointment'" class="flex flex-row space-x-3">
             <div class="text-xs" :class="[isCheckedIn ? 'text-blue-600' : 'text-slate-400']" v-if="status">
@@ -51,7 +51,7 @@ export default {
     path: String,
     itemHeading: String,
     item_type: String,
-    appointmentTime: String,
+    subHeading: String,
     status: String,
   },
   data() {
