@@ -14,7 +14,7 @@ const supabase = createClient(
 //   const { data } = await supabase.from("encounters").select(`*, patient(*)`, { count: "exact", head: false });
 //   return data;
 // });
-const { data, error } = await supabase.from("encounters").select(`*, patient(*)`);
+// const { data } = await supabase.from("encounters").select(`*, patient(*)`);
 
 export const useAppointmentsStore = defineStore("appointments", {
   state: () => {

@@ -33,15 +33,15 @@ const variant = {
 
 <style scoped>
 .primary {
-  @apply bg-blue-500 text-white hover:bg-blue-600;
+  @apply bg-blue-500 text-white hover:bg-blue-600 transition-all duration-100;
 }
 
 .success {
-  @apply bg-emerald-500 text-white hover:bg-emerald-600;
+  @apply bg-emerald-500 text-white hover:bg-emerald-600 transition-all duration-100;
 }
 
 .secondary {
-  @apply bg-slate-200 text-slate-600;
+  @apply bg-slate-200 text-slate-600 hover:bg-slate-300 hover:text-slate-800 transition-all duration-100;
 }
 
 .default {

@@ -50,23 +50,7 @@
 import SpacePreviewList from "../components/Lists/SpacePreviewList.vue";
 import ItemCard from "../components/Cards/ItemCard.vue";
 
-import { useAppointmentStore } from "~/stores/appointments.ts";
-
-const todayAppointments = useAppointmentStore();
-
-// Call Data from Supabase
-const client = useSupabaseClient();
-
-// Encounters
-const { data: appointments } = await useAsyncData("encounters", async () => {
-  const { data } = await client
-    .from("encounters")
-    .select(`*, patient(name)`, { count: "exact", head: false })
-    .order("encounter_time", { ascending: true });
-  return data;
-});
-
-const appointmentNum = appointments.length;
+const appointments = useState("appointments");
 
 // Get Today's Date
 const today = new Date();
