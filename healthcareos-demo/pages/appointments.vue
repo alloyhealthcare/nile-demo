@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :name="'space'" :pages="pages" :items="appointments">
+  <NuxtLayout :name="'space'" :pages="pages" :items="todayAppointments">
     <template #pageContent>
       <div class="flex flex-row flex-grow">
         <div class="p-6 flex-grow flex flex-col">
@@ -15,6 +15,13 @@ const route = useRoute();
 const id = route.params.id;
 
 const appointments = useState("appointments");
+
+const todayAppointments = appointments.value.map((appointment) => ({
+  id: appointment.encounter_id,
+  heading: appointment.patient.name,
+  subheading: appointment.encounter_time,
+  status: appointment.status,
+}));
 
 const pages = [
   {

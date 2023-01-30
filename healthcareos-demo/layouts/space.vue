@@ -6,13 +6,13 @@
         <template #sidebarList>
           <item-card
             v-for="item in items"
-            :key="item.encounter_id"
+            :key="item.id"
             item_type="appointment"
-            :appointmentTime="item.encounter_time"
+            :appointmentTime="item.subHeading"
             variant="tertiary"
-            :path="'/appointments/' + item.encounter_id"
-            :itemHeading="item.patient.name"
-            :status="item.encounter_status"
+            :path="'/appointments/' + item.id"
+            :itemHeading="item.heading"
+            :status="item.status"
         /></template>
       </space-sidebar>
       <div class="p-6 flex-grow flex flex-col">
