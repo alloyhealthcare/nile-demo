@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     prefix: "Headless",
   },
   dayjs: {
-    plugins: ["duration", "relativeTime", "advancedFormat", "weekday", "customParseFormat"],
+    plugins: ["duration", "relativeTime", "advancedFormat", "weekday", "customParseFormat", "badMutable"],
   },
   build: { transpile: ["@fortawesome/vue-fontawesome"] },
 });

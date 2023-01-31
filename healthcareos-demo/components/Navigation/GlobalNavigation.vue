@@ -21,16 +21,12 @@
 
     <div class="flex flex-row items-center py-2 pr-4 space-x-3 text-gray-500 border-r border-gray-800 border-solid">
       <div class="flex flex-col items-center date-wrapper">
-        <div class="leading-none">
-          {{ date }}
-        </div>
+        <div class="leading-none">{{ $dayjs().get("date") }}</div>
         <div class="font-extrabold tracking-wider uppercase text-xxs">
-          {{ weekDay }}
+          {{ $dayjs(day).format("ddd") }}
         </div>
       </div>
-      <div class="text-sm uppercase">
-        {{ todayTime }}
-      </div>
+      <div class="text-sm uppercase">{{ $dayjs(hour).format("hh:mm A") }}</div>
     </div>
     <div class="flex-grow flex flex-row items-center relative space-x-4 border-r border-slate-200">
       <Popover class="h-full">
@@ -146,9 +142,11 @@ const props = defineProps({
     default: [{ name: "Today", path: "/", index: 0 }],
   },
 });
+
+// const day = $dayjs().get("day");
 </script>
 
-<script>
+<!-- <script>
 export default {
   name: "Navigation",
   components: { PopoverButton, PopoverPanel },
@@ -193,6 +191,6 @@ export default {
     },
   },
 };
-</script>
+</script> -->
 
 <style lang="scss" scoped></style>
