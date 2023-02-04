@@ -38,10 +38,10 @@
       <div class="flex flex-col items-center date-wrapper">
         <div class="leading-none">{{ $dayjs().get('date') }}</div>
         <div class="font-extrabold tracking-wider uppercase text-xxs">
-          {{ $dayjs(day).format('ddd') }}
+          {{ $dayjs().format('ddd') }}
         </div>
       </div>
-      <div class="text-sm uppercase">{{ time }}</div>
+      <div class="text-sm uppercase">{{ now }}</div>
     </div>
     <div
       class="flex-grow flex flex-row items-center relative space-x-4 border-r border-slate-200">
@@ -177,7 +177,7 @@
   });
 
   const now = dayjs().format('h:mm a');
-  const time = computed(() => setTimeout(now, 1000));
+  //const time = computed(() => setTimeout(now, 1000));
 
   // const day = $dayjs().get("day");
 </script>

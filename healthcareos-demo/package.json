@@ -41,6 +41,6 @@
     "pinia": "^2.0.29",
     "tippy.js": "^6.3.7",
     "vue-luxon": "^0.10.0",
-    "vue3-easy-data-table": "^1.5.29"
+    "vue3-easy-data-table": "^1.5.30"
   }
 }
