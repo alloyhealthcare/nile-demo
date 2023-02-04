@@ -10,6 +10,13 @@
         </template>
       </EasyDataTable>
     </div>
+    <div class="container">
+      <EasyDataTable
+        :headers="headers"
+        :items="tableItems"
+        hide-footer>
+      </EasyDataTable>
+    </div>
   </NuxtLayout>
 </template>
 
@@ -17,6 +24,7 @@
   //import type { Header, Item } from 'vue3-easy-data-table';
 
   const appointments = useState('appointments');
+  const route = useRouter();
 
   const headers = [
     { text: 'Status', value: 'encounter_status', sortable: true },
@@ -27,6 +35,8 @@
     encounter_status: appointment.encounter_status,
     encounter_link: '/appointments/' + appointment.encounter_id,
   }));
+
+  //const goToAppt = route.push(`${tableItems.encounter_link}`);
 
   //   const items = appointments.map((appointment) => ({
   //     id: appointment.encounter_id,
