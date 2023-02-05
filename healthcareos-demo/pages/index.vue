@@ -40,7 +40,7 @@
           </NuxtLink>
         </div>
       </div>
-      <div class="flex flex-col pl-8">
+      <!-- <div class="flex flex-col pl-8">
         <span class="font-bold uppercase tracking-wider text-xxs text-slate-500"
           >Follow</span
         >
@@ -56,7 +56,7 @@
               class="text-2xl" />
           </NuxtLink>
         </div>
-      </div>
+      </div> -->
     </div>
     <img
       src="@/assets/img/landing-bg-gradient.png"
@@ -69,7 +69,7 @@
   import NuxtLogo from 'assets/img/logo/nuxt.svg';
   import SupabaseLogo from 'assets/img/logo/supabase.svg';
   import TailwindLogo from 'assets/img/logo/tailwindcss.svg';
-  import VercelLogo from 'assets/img/logo/vercel.svg';
+  import Vercel from 'assets/img/logo/vercel.svg';
 
   const logos = [
     {
@@ -100,7 +100,7 @@
       id: 5,
       name: 'Vercel',
       link: 'https://vercel.com/',
-      icon: VercelLogo,
+      icon: Vercel,
     },
   ];
 
@@ -153,6 +153,9 @@
     }
     &.logo-4a {
       @apply group-hover:fill-[#34495e];
+    }
+    &.logo-5 {
+      @apply group-hover:fill-[#000];
     }
   }
 </style>
