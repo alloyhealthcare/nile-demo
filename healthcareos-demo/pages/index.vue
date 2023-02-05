@@ -23,7 +23,7 @@
       class="flex flex-row pb-8 items-stretch divide-x divide-slate-200 z-10 absolute bottom-0">
       <div class="flex flex-col items-center pr-8">
         <span
-          class="font-bold uppercase tracking-wider text-xxs text-slate-500 mb-2"
+          class="font-bold uppercase tracking-wider text-xxs text-slate-500 mb-4"
           >Proudly built with
         </span>
 
@@ -152,7 +152,7 @@
       @apply group-hover:fill-[#41b883];
     }
     &.logo-4a {
-      @apply group-hover:fill-[#34495e];
+      @apply fill-slate-600 group-hover:fill-[#34495e];
     }
     &.logo-5 {
       @apply group-hover:fill-[#000];
