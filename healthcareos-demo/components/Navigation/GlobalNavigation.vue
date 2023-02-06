@@ -6,7 +6,7 @@
       <a
         tag="router-link"
         href="/"
-        :to="{ path: '/' }"
+        :to="{ path: '/launchpad' }"
         class="">
         <svg
           width="50"

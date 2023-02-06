@@ -4,32 +4,56 @@
     :pages="pages"
     :items="todayAppointments">
     <template #pageContent>
-      <div class="flex flex-row flex-grow">
-        <patient-overview-module
+      <div class="flex flex-row flex-grow space-x-3">
+        <component
+          v-for="(module, index) in modules"
+          :is="module.component"
+          :key="index"
+          v-bind="module.props"
+          :patient="thisAppointment.patient"
+          :encounter="thisAppointment"
+          class="mr-4" />
+        <!-- <medication-list-module
+          :moduleInfo="{
+            title: 'Medication List',
+            subTitle: thisAppointment.patient.name,
+          }"
+          :patient="thisAppointment.patient"
+          :medicationList="thisAppointment.patient.medicationList"
+          :primaryButton="{ text: 'Prescribe' }"
+          :secondaryButton="{
+            path: thisAppointment.path,
+            text: 'Review',
+          }"
+          :tertiaryButton="{ text: 'Close' }" /> -->
+
+        <!-- <PatientOverviewModule
           :moduleInfo="{ title: 'Now', subTitle: thisAppointment.room }"
           :patient="thisAppointment.patient"
           :encounter="thisAppointment"
           :primaryButton="{ path: '/intake/vitals', text: 'Begin' }"
           :secondaryButton="{ path: '/detail', text: 'Review' }"
-          :tertiaryButton="{ path: '/note', text: 'Begin' }" />
+          :tertiaryButton="{ path: '/note', text: 'Begin' }" /> -->
       </div>
       <div
         class="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200 flex shadow-mg flex-row space-x-4 p-3">
         <NuxtLink
           :to="'/appointments/' + nextItem.encounter_id"
-          class="space-x-4 py-5 px-6 rounded-xl border border-slate-200"
+          class="group space-x-4 py-5 px-6 rounded-xl border border-slate-200 hover:bg-slate-100 hover:text-slate-900"
           v-if="nextItem">
           <span class="font-semibold">Next</span>
           <span>{{ nextItem.patient.name }}</span>
-          <font-awesome-icon icon="fa-regular fa-arrow-down" />
+          <font-awesome-icon
+            icon="fa-regular fa-arrow-down"
+            class="group-hover:animate-bounce" />
         </NuxtLink>
-        <button
+        <NuxtLink
           class="py-5 px-6 border border-slate-200 rounded-xl"
           v-if="prevItem">
           <span class="font-semibold">Previous</span>
           {{ prevItem.patient.name }}
           <font-awesome-icon icon="fa-regular fa-arrow-up" />
-        </button>
+        </NuxtLink>
       </div>
     </template>
   </NuxtLayout>
@@ -37,8 +61,13 @@
 
 <script setup>
   import PatientOverviewModule from '~/components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue';
+  import MedicationListModule from '~/components/Cards/Modules/ModuleTemplates/MedicationListModule.vue';
+
+  // Add route
   const route = useRoute();
   const id = route.params.id;
+
+  // Add state for appointments and calculate current appointment
 
   const appointments = useState('appointments');
 
@@ -46,8 +75,9 @@
     (appointments) => appointments.encounter_id == id
   );
 
-  //const appointmentDetail = useState("thisAppointment", () => thisAppointment);
+  // const appointmentDetail = useState('thisAppointment', () => thisAppointment);
 
+  // Add computed for today's appointments
   const todayAppointments = appointments.value.map((appointment) => ({
     id: appointment.encounter_id,
     heading: appointment.patient.name,
@@ -55,6 +85,7 @@
     status: appointment.encounter_status,
   }));
 
+  // Pages for navigation
   const pages = [
     {
       name: 'Today',
@@ -73,6 +104,62 @@
     },
   ];
 
+  // Add modules
+  const modules = [
+    {
+      id: 1,
+      type: 'patient-overview',
+      component: PatientOverviewModule,
+      showModule: true,
+      props: {
+        type: 'Follow Up',
+        moduleInfo: {
+          title: 'Now',
+          subTitle: thisAppointment.room,
+        },
+        primaryButton: {
+          path: '/intake/vitals',
+          text: 'Begin',
+        },
+        secondaryButton: {
+          path: '/detail',
+          text: 'Review',
+        },
+        tertiaryButton: {
+          path: '/note',
+          text: 'Begin',
+        },
+      },
+    },
+    {
+      id: 2,
+      type: 'medication-list',
+      component: MedicationListModule,
+      showModule: true,
+      medicationList: thisAppointment.patient.medication_list,
+      props: {
+        type: 'Follow Up',
+        moduleInfo: {
+          title: 'Now',
+          subTitle: thisAppointment.room,
+        },
+        primaryButton: {
+          path: '/intake/vitals',
+          text: 'Begin',
+        },
+        secondaryButton: {
+          path: '/detail',
+          text: 'Review',
+        },
+        tertiaryButton: {
+          path: '/note',
+          text: 'Begin',
+        },
+      },
+    },
+  ];
+
+  // Add computed for next and previous appointments
   const nextItem = computed(() => {
     const filteredNext = appointments.value.filter((appointment) => {
       return (
