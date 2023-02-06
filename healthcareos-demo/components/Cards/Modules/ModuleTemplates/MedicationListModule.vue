@@ -18,8 +18,8 @@
                   medication.name
                 }}</span>
                 <span
-                  >{{ medication.doseAmount }}{{ medication.doseUnit }}
-                  {{ medication.deliveryMethod }}</span
+                  >{{ medication.dose_amount }}{{ medication.dose_unit }}
+                  {{ medication.delivery_method }}</span
                 >
               </div>
               <span class="text-sm font-medium font-slate-500">{{

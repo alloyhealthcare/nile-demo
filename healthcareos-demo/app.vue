@@ -11,7 +11,7 @@
   const { data: appointments } = await useAsyncData('encounters', async () => {
     const { data } = await client
       .from('encounters')
-      .select(`*, patient(*, medication_list(*))`)
+      .select(`*, patient(*)`)
       .order('encounter_time', { ascending: true });
     return data;
   });
@@ -25,4 +25,13 @@
   });
   // Create use Patients to share Patients
   const usePatients = useState('patients', () => patients);
+
+  // Get Medications Data from Supabase
+  const { data: medications } = await useAsyncData('medications', async () => {
+    const { data } = await client.from('medications').select(`*`);
+    return data;
+  });
+
+  // Create use Medications to share Medications
+  const useMedications = useState('medications', () => medications);
 </script>

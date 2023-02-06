@@ -13,6 +13,7 @@
           :patient="thisAppointment.patient"
           :encounter="thisAppointment"
           class="mr-4" />
+
         <!-- <medication-list-module
           :moduleInfo="{
             title: 'Medication List',
@@ -62,14 +63,28 @@
 <script setup>
   import PatientOverviewModule from '~/components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue';
   import MedicationListModule from '~/components/Cards/Modules/ModuleTemplates/MedicationListModule.vue';
+  import MedicationDetailModule from '~~/components/Cards/Modules/ModuleTemplates/MedicationDetailModule.vue';
+
+  const props = [
+    {
+      patientMedList: {
+        type: Array,
+        default: () => [],
+      },
+    },
+  ];
 
   // Add route
   const route = useRoute();
   const id = route.params.id;
 
+  const client = useSupabaseClient();
+
   // Add state for appointments and calculate current appointment
 
   const appointments = useState('appointments');
+
+  const medications = useState('medications');
 
   const thisAppointment = appointments.value.find(
     (appointments) => appointments.encounter_id == id
@@ -104,6 +119,10 @@
     },
   ];
 
+  const patientMedList = medications.value.filter(
+    (medication) => medication.patient == thisAppointment.patient.mrn
+  );
+
   // Add modules
   const modules = [
     {
@@ -136,7 +155,7 @@
       type: 'medication-list',
       component: MedicationListModule,
       showModule: true,
-      medicationList: thisAppointment.patient.medication_list,
+      medicationList: patientMedList,
       props: {
         type: 'Follow Up',
         moduleInfo: {
@@ -157,6 +176,32 @@
         },
       },
     },
+    // {
+    //   id: 3,
+    //   type: 'medication-detail',
+    //   component: MedicationDetailModule,
+    //   medicationDetail: patientMedList[0].value,
+    //   showModule: true,
+    //   props: {
+    //     type: 'Follow Up',
+    //     moduleInfo: {
+    //       title: 'Now',
+    //       subTitle: thisAppointment.room,
+    //     },
+    //     primaryButton: {
+    //       path: '/intake/vitals',
+    //       text: 'Begin',
+    //     },
+    //     secondaryButton: {
+    //       path: '/detail',
+    //       text: 'Review',
+    //     },
+    //     tertiaryButton: {
+    //       path: '/note',
+    //       text: 'Begin',
+    //     },
+    //   },
+    // },
   ];
 
   // Add computed for next and previous appointments
