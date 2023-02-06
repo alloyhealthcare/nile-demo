@@ -21,15 +21,15 @@
     </div>
     <div
       class="flex flex-row pb-8 items-stretch divide-x divide-slate-200 z-10 absolute bottom-0">
-      <div class="flex flex-col items-center pr-8">
+      <div class="flex flex-col items-center">
         <span
-          class="font-bold uppercase tracking-wider text-xxs text-slate-500 mb-4"
-          >Proudly built with
+          class="font-bold uppercase tracking-wider text-xxs text-slate-500 mb-1"
+          >Built with
         </span>
 
-        <div class="flex flex-row items-center space-x-8">
+        <div class="flex flex-row items-center">
           <NuxtLink
-            class="group flex flex-row"
+            class="group flex flex-row px-4 py-3"
             v-for="logo in logos"
             :key="logo.id"
             :to="logo.link"
