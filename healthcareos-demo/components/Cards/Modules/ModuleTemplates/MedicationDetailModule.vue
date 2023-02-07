@@ -11,9 +11,9 @@
       <template #content>
         <div class="w-full">
           <div class="w-full flex flex-row items-center justify-between mb-6">
-            <t-tag variant="medication"
+            <span
               >{{ medicationItem.dose_amount }}{{ medicationItem.dose_unit }}
-              {{ medicationItem.delivery_method }}</t-tag
+              {{ medicationItem.delivery_method }}</span
             >
             <div class="flex flex-row text-xs gap-x-2">
               <span>Refills 7</span>
@@ -21,7 +21,7 @@
           </div>
           <div class="flex flex-col gap-y">
             <span class="font-semibold text-slate-800">{{
-              medicationItem.name
+              medicationItem.Name
             }}</span>
             <span class="text-slate-500">{{ medicationItem.frequency }}</span>
           </div>

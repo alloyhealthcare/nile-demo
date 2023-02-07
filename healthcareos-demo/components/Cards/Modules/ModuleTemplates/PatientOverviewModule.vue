@@ -4,7 +4,8 @@
     :primaryButton="primaryButton"
     :secondaryButton="secondaryButton"
     :tertiaryButton="tertiaryButton"
-    class="h-144">
+    class="h-144"
+    v-if="showModule">
     <template #content>
       <div class="w-full flex flex-row items-center justify-between mb-6">
         <div variant="apptType">{{ encounter.type }}</div>
@@ -64,6 +65,10 @@
       return {};
     },
     props: {
+      showModule: {
+        type: Boolean,
+        default: true,
+      },
       patient: Object,
       encounter: Object,
       moduleInfo: Object,

@@ -1,4 +1,5 @@
 <template>
+  <SeoKit />
   <NuxtLoadingIndicator />
   <NuxtPage />
 </template>

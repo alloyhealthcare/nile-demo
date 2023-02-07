@@ -1,8 +1,10 @@
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="h-screen flex flex-col w-full">
     <GlobalNavigation :pages="pages" />
     <div class="flex flex-row flex-grow">
-      <space-sidebar title="Appointments" meta="17 Appointments">
+      <space-sidebar
+        title="Appointments"
+        meta="17 Appointments">
         <template #sidebarList>
           <item-card
             v-for="item in items"
@@ -15,7 +17,7 @@
             :status="item.status"
         /></template>
       </space-sidebar>
-      <div class="p-6 flex-grow flex flex-col">
+      <div class="p-6 grow flex flex-col">
         <slot name="pageContent" />
       </div>
     </div>
@@ -23,16 +25,16 @@
 </template>
 
 <script setup>
-import GlobalNavigation from "~/components/Navigation/GlobalNavigation.vue";
-import SpaceSidebar from "~/components/Sidebars/SpaceSidebar.vue";
-import ItemCard from "~/components/Cards/ItemCard.vue";
+  import GlobalNavigation from '~/components/Navigation/GlobalNavigation.vue';
+  import SpaceSidebar from '~/components/Sidebars/SpaceSidebar.vue';
+  import ItemCard from '~/components/Cards/ItemCard.vue';
 
-const props = defineProps({
-  items: {
-    type: Array,
-  },
-  pages: {
-    type: Array,
-  },
-});
+  const props = defineProps({
+    items: {
+      type: Array,
+    },
+    pages: {
+      type: Array,
+    },
+  });
 </script>

@@ -1,15 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  app: {
-    head: {
-      charset: 'utf-16',
-      title: 'Demo | HealthcareOS',
-      meta: [
-        // <meta name="description" content="My amazing site">
-        { name: 'description', content: 'HealthcareOS from Alloy Health' },
-      ],
-    },
-  },
+  app: {},
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/supabase',
@@ -35,5 +26,14 @@ export default defineNuxtConfig({
       'badMutable',
     ],
   },
+  extends: ['nuxt-seo-kit'],
   build: { transpile: ['@fortawesome/vue-fontawesome'] },
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+      siteName: 'Demo | HealthcareOSe',
+      siteDescription: 'Welcome to my awesome site!',
+      language: 'en', // prefer more explicit language codes like `en-AU` over `en`
+    },
+  },
 });

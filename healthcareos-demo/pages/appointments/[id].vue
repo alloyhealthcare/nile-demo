@@ -4,37 +4,24 @@
     :pages="pages"
     :items="todayAppointments">
     <template #pageContent>
-      <div class="flex flex-row flex-grow space-x-3">
+      <div class="flex flex-row grow space-x-3 w-full overflow-scroll">
         <component
-          v-for="(module, index) in modules"
+          v-for="(module, index) in patientModules"
+          v-show="module.props.showModule"
           :is="module.component"
           :key="index"
           v-bind="module.props"
           :patient="thisAppointment.patient"
           :encounter="thisAppointment"
+          @medicationSelected="selectedMedicationId"
           class="mr-4" />
 
-        <!-- <medication-list-module
-          :moduleInfo="{
-            title: 'Medication List',
-            subTitle: thisAppointment.patient.name,
-          }"
-          :patient="thisAppointment.patient"
-          :medicationList="thisAppointment.patient.medicationList"
-          :primaryButton="{ text: 'Prescribe' }"
-          :secondaryButton="{
-            path: thisAppointment.path,
-            text: 'Review',
-          }"
-          :tertiaryButton="{ text: 'Close' }" /> -->
-
-        <!-- <PatientOverviewModule
-          :moduleInfo="{ title: 'Now', subTitle: thisAppointment.room }"
-          :patient="thisAppointment.patient"
-          :encounter="thisAppointment"
-          :primaryButton="{ path: '/intake/vitals', text: 'Begin' }"
-          :secondaryButton="{ path: '/detail', text: 'Review' }"
-          :tertiaryButton="{ path: '/note', text: 'Begin' }" /> -->
+        {{ selectedMedication }}
+        <!-- <component
+          v-for="medication in patientMedList"
+          :is="MedicationDetailModule"
+          :key="medication.id"
+          v-bind="patientMedList" /> -->
       </div>
       <div
         class="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200 flex shadow-mg flex-row space-x-4 p-3">
@@ -70,6 +57,12 @@
       patientMedList: {
         type: Array,
         default: () => [],
+      },
+    },
+    {
+      medDetail: {
+        type: Object,
+        default: null,
       },
     },
   ];
@@ -123,14 +116,22 @@
     (medication) => medication.patient == thisAppointment.patient.mrn
   );
 
+  const medDetail = patientMedList.findIndex(
+    (medication) => medication.index == patientMedList.index
+  );
+
+  const eachMedication = patientMedList.forEach((medication) => {
+    return medication;
+  });
+
   // Add modules
-  const modules = [
+  const patientModules = [
     {
       id: 1,
       type: 'patient-overview',
       component: PatientOverviewModule,
-      showModule: true,
       props: {
+        showModule: true,
         type: 'Follow Up',
         moduleInfo: {
           title: 'Now',
@@ -154,10 +155,11 @@
       id: 2,
       type: 'medication-list',
       component: MedicationListModule,
-      showModule: true,
-      medicationList: patientMedList,
+
       props: {
+        showModule: true,
         type: 'Follow Up',
+        medicationList: patientMedList,
         moduleInfo: {
           title: 'Now',
           subTitle: thisAppointment.room,
@@ -176,33 +178,9 @@
         },
       },
     },
-    // {
-    //   id: 3,
-    //   type: 'medication-detail',
-    //   component: MedicationDetailModule,
-    //   medicationDetail: patientMedList[0].value,
-    //   showModule: true,
-    //   props: {
-    //     type: 'Follow Up',
-    //     moduleInfo: {
-    //       title: 'Now',
-    //       subTitle: thisAppointment.room,
-    //     },
-    //     primaryButton: {
-    //       path: '/intake/vitals',
-    //       text: 'Begin',
-    //     },
-    //     secondaryButton: {
-    //       path: '/detail',
-    //       text: 'Review',
-    //     },
-    //     tertiaryButton: {
-    //       path: '/note',
-    //       text: 'Begin',
-    //     },
-    //   },
-    // },
   ];
+
+  //const chooseMedication = (modules[2] = !showModule);
 
   // Add computed for next and previous appointments
   const nextItem = computed(() => {
