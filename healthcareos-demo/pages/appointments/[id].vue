@@ -6,22 +6,46 @@
     <template #pageContent>
       <div class="flex flex-row grow space-x-3 w-full overflow-scroll">
         <component
-          v-for="(module, index) in patientModules"
+          v-for="(module, index) in allModules"
           v-show="module.props.showModule"
           :is="module.component"
           :key="index"
           v-bind="module.props"
           :patient="thisAppointment.patient"
-          :encounter="thisAppointment"
-          @medicationSelected="selectedMedicationId"
-          class="mr-4" />
-
-        {{ selectedMedication }}
-        <!-- <component
-          v-for="medication in patientMedList"
-          :is="MedicationDetailModule"
-          :key="medication.id"
-          v-bind="patientMedList" /> -->
+          :encounter="thisAppointment" />
+        <div class="w-96 flex-none">
+          <div class="mb-12">
+            <div class="bg-white rounded-md border p-2 border-slate-200">
+              Search
+            </div>
+          </div>
+          <div class="mb-4">
+            <span class="font-semibold text-slate-500">Open...</span>
+          </div>
+          <div class="grid grid-cols-2 w-full mb-8">
+            <h-button
+              variant="buttonXL"
+              @click="flowModules = 'MedicationListModule'">
+              Last Appointment
+            </h-button>
+            <h-button
+              variant="buttonXL"
+              @click="moduleIsVisible = !moduleIsVisible"
+              >Medications</h-button
+            >
+            <h-button variant="buttonXL">Allergies</h-button>
+            <h-button variant="buttonXL">Results</h-button>
+          </div>
+          <div class="mb-4">
+            <span class="font-semibold text-slate-500">Create...</span>
+          </div>
+          <div class="grid grid-cols-2 w-full mb-8">
+            <h-button variant="buttonXL">Send Message</h-button>
+            <h-button variant="buttonXL">Create Order</h-button>
+            <h-button variant="buttonXL">Refill</h-button>
+            <h-button variant="buttonXL">Referral</h-button>
+          </div>
+        </div>
       </div>
       <div
         class="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200 flex shadow-mg flex-row space-x-4 p-3">
@@ -116,14 +140,6 @@
     (medication) => medication.patient == thisAppointment.patient.mrn
   );
 
-  const medDetail = patientMedList.findIndex(
-    (medication) => medication.index == patientMedList.index
-  );
-
-  const eachMedication = patientMedList.forEach((medication) => {
-    return medication;
-  });
-
   // Add modules
   const patientModules = [
     {
@@ -155,9 +171,8 @@
       id: 2,
       type: 'medication-list',
       component: MedicationListModule,
-
       props: {
-        showModule: true,
+        showModule: false,
         type: 'Follow Up',
         medicationList: patientMedList,
         moduleInfo: {
@@ -180,6 +195,37 @@
     },
   ];
 
+  const medicationModules = patientMedList.map((medication) => ({
+    component: MedicationDetailModule,
+    props: {
+      showModule: false,
+      medicationItem: {
+        id: medication.medication_id,
+        dose_amount: medication.dose_amount,
+        dose_unit: medication.dose_unit,
+        frequency: medication.frequency,
+        Name: medication.Name,
+      },
+      moduleInfo: {
+        title: thisAppointment.patient.name,
+        subTitle: medication.Name,
+      },
+      primaryButton: {
+        path: '/intake/vitals',
+        text: 'Begin',
+      },
+      secondaryButton: {
+        path: '/detail',
+        text: 'Review',
+      },
+      tertiaryButton: {
+        path: '/note',
+        text: 'Begin',
+      },
+    },
+  }));
+
+  const allModules = patientModules.concat(medicationModules);
   //const chooseMedication = (modules[2] = !showModule);
 
   // Add computed for next and previous appointments
