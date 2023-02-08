@@ -9,7 +9,7 @@
         v-for="item in items.slice(0, n)"
         :key="item.id"
         item_type="appointment"
-        :appointmentTime="item.encounter_time"
+        :subHeading="item.encounter_date"
         variant="tertiary"
         :path="'/'"
         :itemHeading="item.patient.name"
@@ -17,48 +17,50 @@
       <button to="">+{{ l - n }} More</button>
     </div>
     <div class="pt-2 border-t border-slate-200">
-      <span class="text-sm text-slate-700">14 Follow Ups, 7 New Patients, 3 Physicals</span>
+      <span class="text-sm text-slate-700"
+        >14 Follow Ups, 7 New Patients, 3 Physicals</span
+      >
     </div>
   </div>
 </template>
 
 <script setup>
-import ItemCard from "../Cards/ItemCard.vue";
-import { defineProps } from "vue";
+  import ItemCard from '../Cards/ItemCard.vue';
+  import { defineProps } from 'vue';
 
-const props = defineProps({
-  items: {
-    type: Object,
-    required: true,
-  },
-  l: {
-    type: Number,
-    required: true,
-  },
-  n: {
-    type: Number,
-    required: true,
-  },
-});
+  const props = defineProps({
+    items: {
+      type: Object,
+      required: true,
+    },
+    l: {
+      type: Number,
+      required: true,
+    },
+    n: {
+      type: Number,
+      required: true,
+    },
+  });
 </script>
 <script>
-export default {
-  components: {
-    ItemCard,
-  },
-  //  props: {
-  //    items: {
-  //      type: Object,
-  //      required: true,
-  //    },
-  //    l: {
-  //      type: Number,
-  //      required: true,
-  //    },
-  //    n: {
-  //     type: Number,
-  //      required: true,
-  //    },
-  //  },
-};
+  export default {
+    components: {
+      ItemCard,
+    },
+    //  props: {
+    //    items: {
+    //      type: Object,
+    //      required: true,
+    //    },
+    //    l: {
+    //      type: Number,
+    //      required: true,
+    //    },
+    //    n: {
+    //     type: Number,
+    //      required: true,
+    //    },
+    //  },
+  };
 </script>

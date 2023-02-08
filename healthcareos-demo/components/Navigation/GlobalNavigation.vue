@@ -41,7 +41,7 @@
           {{ $dayjs().format('ddd') }}
         </div>
       </div>
-      <div class="text-sm uppercase">{{ now }}</div>
+      <div class="text-sm uppercase">{{ formatted }}</div>
     </div>
     <div
       class="flex-grow flex flex-row items-center relative space-x-4 border-r border-slate-200">
@@ -159,6 +159,7 @@
 
 <script setup>
   import dayjs from 'dayjs';
+  //import { useDateFormat, useNow } from '@vueuse/core';
   import {
     Menu,
     MenuButton,
@@ -176,57 +177,12 @@
     },
   });
 
-  const now = dayjs().format('h:mm a');
+  //const formatted = useDateFormat(useNow(), 'hh:mm A');
+
+  //const now = dayjs().format('h:mm a');
   //const time = computed(() => setTimeout(now, 1000));
 
   // const day = $dayjs().get("day");
 </script>
-<!---
-<script>
-  export default {
-    name: 'Navigation',
-    components: { PopoverButton, PopoverPanel },
-    props: {},
-    data() {
-      return {
-        todayTime: '',
-      };
-    },
-    created() {
-      setInterval(this.getNow, 1000);
-    },
-    computed: {
-      date: function () {
-        const today = new Date();
-        const day = today.getDate();
-        return day;
-      },
-      weekDay: function () {
-        const today = new Date();
-        const weekDay = today.getDay();
-        var weekDayName = new Array(7);
-        weekDayName[0] = 'Sun';
-        weekDayName[1] = 'Mon';
-        weekDayName[2] = 'Tue';
-        weekDayName[3] = 'Wed';
-        weekDayName[4] = 'Thu';
-        weekDayName[5] = 'Fri';
-        weekDayName[6] = 'Sat';
-        return weekDayName[weekDay];
-      },
-    },
-    methods: {
-      getNow: function () {
-        const today = new Date();
-        var hours = today.getHours(); //
-        var AmOrPm = hours >= 12 ? 'pm' : 'am';
-        hours = hours % 12 || 12;
-        var minutes = ('0' + today.getMinutes()).slice(-2);
-        var finalTime = hours + ':' + minutes + ' ' + AmOrPm;
-        this.todayTime = finalTime;
-      },
-    },
-  };
-</script>!-->
 
 <style lang="scss" scoped></style>

@@ -6,74 +6,108 @@
     :to="path">
     <div>
       <div class="mb-2">
-        <span class="text-base font-medium leading-none">{{ itemHeading }}</span>
+        <span class="text-base font-medium leading-none">{{
+          itemHeading
+        }}</span>
       </div>
       <div v-if="item_type != 'message'">
         <div class="flex flex-row space-x-3 leading-none items-center">
-          <div class="text-xs font-semibold flex flex-row gap-x-1 text-slate-500 items-center">
-            <font-awesome-icon icon="fa-solid fa-clock" v-if="item_type == 'appointment'" />
+          <div
+            class="text-xs font-semibold flex flex-row gap-x-1 text-slate-500 items-center">
+            <font-awesome-icon
+              icon="fa-solid fa-clock"
+              v-if="item_type == 'appointment'" />
             <div v-if="isNow || isNext">
               <span v-if="isNow">Now</span>
               <span v-if="isNext">Next</span>
             </div>
-            <span v-else>{{ $dayjs(subHeading, "HH:mm:ss").format("h:mm A") }} </span>
+            <span v-else
+              >{{ $dayjs(subHeading, 'HH:mm:ss').format('hh:mm a') }}
+            </span>
           </div>
-          <div v-if="item_type === 'appointment'" class="flex flex-row space-x-3">
-            <div class="text-xs" :class="[isCheckedIn ? 'text-blue-600' : 'text-slate-400']" v-if="status">
-              <font-awesome-icon icon="fa-regular fa-circle-check" class="mr-0.5" />
+          <div
+            v-if="item_type === 'appointment'"
+            class="flex flex-row space-x-3">
+            <div
+              class="text-xs"
+              :class="[isCheckedIn ? 'text-blue-600' : 'text-slate-400']"
+              v-if="status">
+              <font-awesome-icon
+                icon="fa-regular fa-circle-check"
+                class="mr-0.5" />
               Checked In
             </div>
-            <div class="text-xs" :class="[isRoomed ? 'text-blue-600' : 'text-slate-400']" v-if="status != 'No Status'">
-              <font-awesome-icon icon="fa-regular fa-sign-in" class="mr-1" />Roomed
+            <div
+              class="text-xs"
+              :class="[isRoomed ? 'text-blue-600' : 'text-slate-400']"
+              v-if="status != 'No Status'">
+              <font-awesome-icon
+                icon="fa-regular fa-sign-in"
+                class="mr-1" />Roomed
             </div>
           </div>
-          <div v-if="item_type === 'order'" class="flex flex-row space-x-3">
-            <div class="text-xs" :class="[orderStatus ? 'text-blue-600' : 'text-slate-400']">
-              <font-awesome-icon icon="fa-regular fa-circle-check" class="mr-0.5" />
+          <div
+            v-if="item_type === 'order'"
+            class="flex flex-row space-x-3">
+            <div
+              class="text-xs"
+              :class="[orderStatus ? 'text-blue-600' : 'text-slate-400']">
+              <font-awesome-icon
+                icon="fa-regular fa-circle-check"
+                class="mr-0.5" />
               {{ status }}
             </div>
           </div>
         </div>
 
-        <div class="" v-if="item_type === 'order'"></div>
+        <div
+          class=""
+          v-if="item_type === 'order'"></div>
       </div>
     </div>
     <div class="currentItem">
-      <font-awesome-icon icon="fa-regular fa-arrow-right" class="text-slate-400" />
+      <font-awesome-icon
+        icon="fa-regular fa-arrow-right"
+        class="text-slate-400" />
     </div>
   </NuxtLink>
 </template>
 
-<script>
-export default {
-  name: "ItemButtonCard",
-  props: {
+<script setup>
+  // import { useDateFormat } from '@vueuse/core';
+
+  const props = defineProps({
     path: String,
     itemHeading: String,
     item_type: String,
     subHeading: String,
     status: String,
-  },
-  data() {
-    return {
-      isCheckedIn: this.status != "No Status",
-      isRoomed: this.status === "Roomed",
-      orderStatus: this.status === "Filled",
-      isNow: this.appointmentTime === "08:30:00",
-      isNext: this.appointmentTime == "08:45:00",
-    };
-  },
-  computed: {
-    checkedIn_class() {},
-  },
-};
+  });
+</script>
+
+<script>
+  export default {
+    name: 'ItemButtonCard',
+    data() {
+      return {
+        isCheckedIn: this.status != 'No Status',
+        isRoomed: this.status === 'Roomed',
+        orderStatus: this.status === 'Filled',
+        isNow: this.appointmentTime === '08:30:00',
+        isNext: this.appointmentTime == '08:45:00',
+      };
+    },
+    computed: {
+      checkedIn_class() {},
+    },
+  };
 </script>
 
 <style scoped>
-.active--exact .currentItem {
-  display: block;
-}
-a .currentItem {
-  display: none;
-}
+  .active--exact .currentItem {
+    display: block;
+  }
+  a .currentItem {
+    display: none;
+  }
 </style>

@@ -16,7 +16,11 @@
         <div class="grid items-stretch grid-cols-3 gap-4">
           <div
             class="flex flex-col justify-between col-span-1 space-y-4 place-items-stretch">
-            <div class="col-span-1 p-6 rounded-3xl bg-slateTransparent-3">
+            <space-preview-list
+              :items="appointments"
+              :n="2"
+              :l="21" />
+            <!-- <div class="col-span-1 p-6 rounded-3xl bg-slateTransparent-3">
               <div class="mb-5">
                 <span class="block pb-2 text-xl text-slate-700"
                   >Appointments</span
@@ -40,7 +44,7 @@
                   >14 Follow Ups, 7 New Patients, 3 Physicals</span
                 >
               </div>
-            </div>
+            </div> -->
           </div>
           <div
             class="flex flex-col justify-between col-span-1 space-y-4 place-items-stretch">
