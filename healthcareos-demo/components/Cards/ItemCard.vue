@@ -26,7 +26,7 @@
             </span>
           </div>
           <div
-            v-if="item_type === 'appointment'"
+            v-if="item_type === 'appointments'"
             class="flex flex-row space-x-3">
             <div
               class="text-xs"
@@ -74,8 +74,6 @@
 </template>
 
 <script setup>
-  // import { useDateFormat } from '@vueuse/core';
-
   const props = defineProps({
     path: String,
     itemHeading: String,

@@ -9,7 +9,7 @@
           <item-card
             v-for="item in items"
             :key="item.id"
-            item_type="appointment"
+            item_type="appointments"
             :subHeading="item.subHeading"
             variant="tertiary"
             :path="'/appointments/' + item.id"

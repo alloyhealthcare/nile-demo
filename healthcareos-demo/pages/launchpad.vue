@@ -17,43 +17,21 @@
           <div
             class="flex flex-col justify-between col-span-1 space-y-4 place-items-stretch">
             <space-preview-list
-              :items="appointments"
-              :n="2"
+              :items="appointmentList"
+              type="appointments"
+              :n="5"
               :l="21" />
-            <!-- <div class="col-span-1 p-6 rounded-3xl bg-slateTransparent-3">
-              <div class="mb-5">
-                <span class="block pb-2 text-xl text-slate-700"
-                  >Appointments</span
-                >
-                <span class="block text-slate-700">37 Appointments Today</span>
-              </div>
-              <div class="flex flex-col mb-6 space-y-3">
-                <item-card
-                  v-for="appointment in appointments"
-                  :key="appointment.encounter_id"
-                  item_type="appointment"
-                  :subHeading="appointment.encounter_time"
-                  variant="tertiary"
-                  :path="'/appointments/' + appointment.encounter_id"
-                  :itemHeading="appointment.patient.name"
-                  :status="appointment.encounter_status" />
-                <button to="">+15 More</button>
-              </div>
-              <div class="pt-2 border-t border-slate-200">
-                <span class="text-sm text-slate-700"
-                  >14 Follow Ups, 7 New Patients, 3 Physicals</span
-                >
-              </div>
-            </div> -->
           </div>
           <div
             class="flex flex-col justify-between col-span-1 space-y-4 place-items-stretch">
             <space-preview-list
-              :items="appointments"
+              :items="appointmentList"
+              type="appointments"
               :n="2"
               :l="21" />
             <space-preview-list
-              :items="appointments"
+              :items="appointmentList"
+              type="appointments"
               :n="2"
               :l="21" />
           </div>
@@ -69,6 +47,13 @@
   import ItemCard from '../components/Cards/ItemCard.vue';
 
   const appointments = useState('appointments');
+
+  const appointmentList = appointments.value.map((appointment) => ({
+    id: appointment.encounter_id,
+    heading: appointment.patient.name,
+    subHeading: appointment.encounter_time,
+    status: appointment.encounter_status,
+  }));
 
   // Get Today's Date
   const today = new Date();

@@ -3,10 +3,9 @@
     class="sticky top-0 z-50 flex items-stretch w-full px-8 bg-white border border-gray-200 divide-gray-200 navigation drop-shadow">
     <div
       class="border-r border-gray-300 border-solid pr-4 flex items-center mr-4">
-      <a
+      <NuxtLink
         tag="router-link"
-        href="/"
-        :to="{ path: '/launchpad' }"
+        href="/launchpad"
         class="">
         <svg
           width="50"
@@ -30,7 +29,7 @@
             d="M36.3 4.26966H39.5585L41.8057 12.5843H42.7045L45.1764 4.26966H48.4349L44.9517 16.0674C44.5472 17.4307 43.9555 18.427 43.1764 19.0562C42.3974 19.6854 41.2663 20 39.7832 20H37.6483V17.3034H39.7832C40.3974 17.3034 40.8469 17.1835 41.1315 16.9438C41.4311 16.7191 41.6558 16.3146 41.8057 15.7303L41.918 15.2809H39.3113L36.3 4.26966Z"
             fill="#1A1E23" />
         </svg>
-      </a>
+      </NuxtLink>
     </div>
 
     <div

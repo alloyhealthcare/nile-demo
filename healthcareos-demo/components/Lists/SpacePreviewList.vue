@@ -1,19 +1,22 @@
 <template>
   <div class="col-span-1 p-6 rounded-3xl bg-slateTransparent-3">
     <div class="mb-5">
-      <span class="block pb-2 text-xl text-slate-700">Appointments</span>
-      <span class="block text-slate-700">37 Appointments Today</span>
+      <span class="block pb-2 text-xl text-slate-700 capitalize">{{
+        type
+      }}</span>
+      <span class="block text-slate-700 capitalize"
+        >{{ l }} {{ type }} Today</span
+      >
     </div>
     <div class="flex flex-col mb-6 space-y-3">
       <item-card
         v-for="item in items.slice(0, n)"
         :key="item.id"
-        item_type="appointment"
-        :subHeading="item.encounter_date"
-        variant="tertiary"
-        :path="'/'"
-        :itemHeading="item.patient.name"
-        :status="item.encounter_status" />
+        :item_type="type"
+        :subHeading="item.subHeading"
+        :path="type + '/' + item.id"
+        :itemHeading="item.heading"
+        :status="item.status" />
       <button to="">+{{ l - n }} More</button>
     </div>
     <div class="pt-2 border-t border-slate-200">
@@ -39,6 +42,10 @@
     },
     n: {
       type: Number,
+      required: true,
+    },
+    type: {
+      type: String,
       required: true,
     },
   });
