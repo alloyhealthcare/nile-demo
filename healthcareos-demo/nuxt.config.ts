@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     '@nathanchase/nuxt-dayjs-module',
     '@pinia/nuxt',
     'nuxt-svgo',
-    //'@vueuse/nuxt',
+    '@vueuse/nuxt',
   ],
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',

@@ -21,9 +21,7 @@
               <span v-if="isNow">Now</span>
               <span v-if="isNext">Next</span>
             </div>
-            <span v-else
-              >{{ $dayjs(subHeading, 'HH:mm:ss').format('hh:mm a') }}
-            </span>
+            <span v-else>{{ formattedTime }} </span>
           </div>
           <div
             v-if="item_type === 'appointments'"
@@ -74,6 +72,8 @@
 </template>
 
 <script setup>
+  import { useDateFormat } from '@vueuse/core';
+  import dayjs from 'dayjs';
   const props = defineProps({
     path: String,
     itemHeading: String,
@@ -81,6 +81,10 @@
     subHeading: String,
     status: String,
   });
+
+  const time = ref(props.subHeading);
+
+  const formattedTime = useDateFormat(time, 'HH:mm a');
 </script>
 
 <script>

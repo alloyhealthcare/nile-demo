@@ -51,7 +51,7 @@
   const appointmentList = appointments.value.map((appointment) => ({
     id: appointment.encounter_id,
     heading: appointment.patient.name,
-    subHeading: appointment.encounter_time,
+    subHeading: appointment.encounter_date,
     status: appointment.encounter_status,
   }));
 

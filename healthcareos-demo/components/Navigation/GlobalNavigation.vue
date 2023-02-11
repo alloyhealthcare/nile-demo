@@ -40,7 +40,7 @@
           {{ $dayjs().format('ddd') }}
         </div>
       </div>
-      <div class="text-sm uppercase">{{ formatted }}</div>
+      <div class="text-sm uppercase">{{ currentTime }}</div>
     </div>
     <div
       class="flex-grow flex flex-row items-center relative space-x-4 border-r border-slate-200">
@@ -176,12 +176,7 @@
     },
   });
 
-  //const formatted = useDateFormat(useNow(), 'hh:mm A');
-
-  //const now = dayjs().format('h:mm a');
-  //const time = computed(() => setTimeout(now, 1000));
-
-  // const day = $dayjs().get("day");
+  const currentTime = useDateFormat(useNow(), 'hh:mm A');
 </script>
 
 <style lang="scss" scoped></style>
