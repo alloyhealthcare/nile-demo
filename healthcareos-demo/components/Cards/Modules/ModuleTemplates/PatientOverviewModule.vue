@@ -1,9 +1,7 @@
 <template>
   <module-card-base
     :moduleInfo="moduleInfo"
-    :primaryButton="primaryButton"
-    :secondaryButton="secondaryButton"
-    :tertiaryButton="tertiaryButton"
+    :moduleActions="moduleActions"
     class="h-144"
     v-if="showModule">
     <template #content>
@@ -54,8 +52,23 @@
   </module-card-base>
 </template>
 
-<script>
+<script setup>
   import ModuleCardBase from '../ModuleBase/ModuleCardBase.vue';
+
+  const props = defineProps({
+    showModule: {
+      type: Boolean,
+      default: true,
+    },
+    patient: Object,
+    encounter: Object,
+    moduleInfo: Object,
+    moduleActions: Object,
+  });
+</script>
+
+<!-- <script>
+  
   export default {
     name: 'PatientOverviewModule',
     components: {
@@ -77,6 +90,6 @@
       tertiaryButton: Object,
     },
   };
-</script>
+</script> -->
 
 <style></style>

@@ -6,6 +6,7 @@
       default: variant.default,
       secondary: variant.secondary,
       success: variant.success,
+      buttonXL: variant.buttonXL,
     }">
     <slot />
   </button>
@@ -28,6 +29,7 @@
     default: props.variant === 'default',
     success: props.variant === 'success',
     secondary: props.variant === 'secondary',
+    buttonXL: props.variant === 'buttonXL',
   };
 </script>
 
@@ -44,7 +46,11 @@
     @apply bg-slate-200 text-slate-600 hover:bg-slate-300 hover:text-slate-800 transition-all duration-100;
   }
 
+  .buttonXL {
+    @apply px-2 py-6 bg-white/50 border-slate-200/50 border border-solid hover:bg-white hover:border-slate-200/90 hover:shadow-sm;
+  }
+
   .default {
-    @apply hover:bg-slate-200;
+    @apply hover:bg-slate-200 transition-all duration-100;
   }
 </style>

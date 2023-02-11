@@ -1,7 +1,9 @@
 <template>
   <div class="h-screen flex flex-col w-full">
     <GlobalNavigation :pages="pages" />
-    <div class="flex flex-row flex-grow">
+    <div
+      class="flex flex-row flex-grow"
+      v-if="flowActive">
       <space-sidebar
         title="Appointments"
         meta="17 Appointments">
@@ -18,8 +20,13 @@
         /></template>
       </space-sidebar>
       <div class="p-6 grow flex flex-col">
-        <slot name="pageContent" />
+        <slot name="flowContent" />
       </div>
+    </div>
+    <div
+      class="flex flex-row w-full h-full"
+      v-if="flowActive == false">
+      <slot name="flowDetail" />
     </div>
   </div>
 </template>
@@ -32,6 +39,10 @@
   const props = defineProps({
     items: {
       type: Array,
+    },
+    flowActive: {
+      type: Boolean,
+      default: true,
     },
     pages: {
       type: Array,

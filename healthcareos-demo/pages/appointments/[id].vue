@@ -2,9 +2,10 @@
   <NuxtLayout
     :name="'space'"
     :pages="pages"
-    :items="todayAppointments">
-    <template #pageContent>
-      <div class="flex flex-row grow space-x-3 w-full overflow-scroll">
+    :items="todayAppointments"
+    :flowActive="isParentRoute">
+    <template #flowContent>
+      <div class="flex flex-row grow w-full overflow-scroll">
         <component
           v-for="(module, index) in allModules"
           v-show="module.props.showModule"
@@ -13,7 +14,7 @@
           v-bind="module.props"
           :patient="thisAppointment.patient"
           :encounter="thisAppointment" />
-        <div class="w-96 flex-none">
+        <div class="w-96 flex-none ml-6">
           <div class="mb-12">
             <div class="bg-white rounded-md border p-2 border-slate-200">
               Search
@@ -22,24 +23,17 @@
           <div class="mb-4">
             <span class="font-semibold text-slate-500">Open...</span>
           </div>
-          <div class="grid grid-cols-2 w-full mb-8">
-            <h-button
-              variant="buttonXL"
-              @click="flowModules = 'MedicationListModule'">
-              Last Appointment
-            </h-button>
-            <h-button
-              variant="buttonXL"
-              @click="moduleIsVisible = !moduleIsVisible"
-              >Medications</h-button
-            >
+          <div class="grid grid-cols-3 w-full mb-8 gap-4">
+            <h-button variant="buttonXL"> Last Appointment </h-button>
+            <h-button variant="buttonXL">Medications</h-button>
+            <h-button variant="buttonXL">Medical History</h-button>
             <h-button variant="buttonXL">Allergies</h-button>
             <h-button variant="buttonXL">Results</h-button>
           </div>
           <div class="mb-4">
             <span class="font-semibold text-slate-500">Create...</span>
           </div>
-          <div class="grid grid-cols-2 w-full mb-8">
+          <div class="grid grid-cols-2 w-full mb-8 gap-4">
             <h-button variant="buttonXL">Send Message</h-button>
             <h-button variant="buttonXL">Create Order</h-button>
             <h-button variant="buttonXL">Refill</h-button>
@@ -68,6 +62,7 @@
         </NuxtLink>
       </div>
     </template>
+    <template #flowDetail><NuxtPage /></template>
   </NuxtLayout>
 </template>
 
@@ -75,6 +70,7 @@
   import PatientOverviewModule from '~/components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue';
   import MedicationListModule from '~/components/Cards/Modules/ModuleTemplates/MedicationListModule.vue';
   import MedicationDetailModule from '~~/components/Cards/Modules/ModuleTemplates/MedicationDetailModule.vue';
+  import HButton from '~/components/Buttons/HButton.vue';
 
   const props = [
     {
@@ -97,7 +93,9 @@
 
   const client = useSupabaseClient();
 
-  // Add state for appointments and calculate current appointment
+  const isParentRoute = computed(() => {
+    return route.path === '/appointments/' + id + '/';
+  });
 
   const appointments = useState('appointments');
 
@@ -106,6 +104,8 @@
   const thisAppointment = appointments.value.find(
     (appointments) => appointments.encounter_id == id
   );
+
+  //const thisAppointmentState = useState('thisAppointment', thisAppointment);
 
   // const appointmentDetail = useState('thisAppointment', () => thisAppointment);
 
@@ -152,18 +152,25 @@
         moduleInfo: {
           title: 'Now',
           subTitle: thisAppointment.room,
+          badge: {
+            variant: 'primary',
+            solid: true,
+            text: 'Follow Up',
+          },
         },
-        primaryButton: {
-          path: '/intake/vitals',
-          text: 'Begin',
-        },
-        secondaryButton: {
-          path: '/detail',
-          text: 'Review',
-        },
-        tertiaryButton: {
-          path: '/note',
-          text: 'Begin',
+        moduleActions: {
+          primary: {
+            path: '/intake/detail',
+            text: 'Begin Encounter',
+          },
+          secondary: {
+            path: '/appointments/' + id + '/detail',
+            text: 'Review',
+          },
+          tertiary: {
+            path: '/note',
+            text: 'Cancel',
+          },
         },
       },
     },
@@ -179,17 +186,19 @@
           title: 'Now',
           subTitle: thisAppointment.room,
         },
-        primaryButton: {
-          path: '/intake/vitals',
-          text: 'Begin',
-        },
-        secondaryButton: {
-          path: '/detail',
-          text: 'Review',
-        },
-        tertiaryButton: {
-          path: '/note',
-          text: 'Begin',
+        moduleActions: {
+          primary: {
+            path: '/intake/vitals',
+            text: 'Begin',
+          },
+          secondary: {
+            path: '/detail',
+            text: 'Review',
+          },
+          tertiary: {
+            path: '/note',
+            text: 'Begin',
+          },
         },
       },
     },
@@ -210,17 +219,19 @@
         title: thisAppointment.patient.name,
         subTitle: medication.Name,
       },
-      primaryButton: {
-        path: '/intake/vitals',
-        text: 'Begin',
-      },
-      secondaryButton: {
-        path: '/detail',
-        text: 'Review',
-      },
-      tertiaryButton: {
-        path: '/note',
-        text: 'Begin',
+      moduleActions: {
+        primary: {
+          path: '/intake/vitals',
+          text: 'Begin',
+        },
+        secondary: {
+          path: '/detail',
+          text: 'Review',
+        },
+        tertiary: {
+          path: '/note',
+          text: 'Begin',
+        },
       },
     },
   }));

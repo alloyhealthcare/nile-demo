@@ -73,7 +73,6 @@
 
 <script setup>
   import { useDateFormat } from '@vueuse/core';
-  import dayjs from 'dayjs';
   const props = defineProps({
     path: String,
     itemHeading: String,
@@ -85,24 +84,12 @@
   const time = ref(props.subHeading);
 
   const formattedTime = useDateFormat(time, 'HH:mm a');
-</script>
 
-<script>
-  export default {
-    name: 'ItemButtonCard',
-    data() {
-      return {
-        isCheckedIn: this.status != 'No Status',
-        isRoomed: this.status === 'Roomed',
-        orderStatus: this.status === 'Filled',
-        isNow: this.appointmentTime === '08:30:00',
-        isNext: this.appointmentTime == '08:45:00',
-      };
-    },
-    computed: {
-      checkedIn_class() {},
-    },
-  };
+  const isCheckedIn = ref(props.status != 'No Status');
+  const isRoomed = ref(props.status === 'Roomed');
+  const orderStatus = ref(props.status === 'Filled');
+  const isNow = ref(formattedTime === '08:30 am');
+  const isNext = ref(formattedTime == '08:45 am');
 </script>
 
 <style scoped>
