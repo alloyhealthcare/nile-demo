@@ -94,7 +94,10 @@
   const client = useSupabaseClient();
 
   const isParentRoute = computed(() => {
-    return route.path === '/appointments/' + id + '/';
+    return (
+      route.path === '/appointments/' + id ||
+      route.path === '/appointments/' + id + '/'
+    );
   });
 
   const appointments = useState('appointments');
