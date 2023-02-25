@@ -1,28 +1,26 @@
 <template>
-  <div class="col-span-1 p-6 rounded-3xl bg-slateTransparent-3">
+  <div class="col-span-1 p-6 rounded-3xl bg-slate-900/[.022]">
     <div class="mb-5">
-      <span class="block pb-2 text-xl text-slate-700 capitalize">{{
+      <span class="block pb-1 text-xl text-slate-700 capitalize font-medium">{{
         type
       }}</span>
       <span class="block text-slate-700 capitalize"
-        >{{ l }} {{ type }} Today</span
+        >{{ totalLength }} {{ type }} Today</span
       >
     </div>
     <div class="flex flex-col mb-6 space-y-3">
       <item-card
-        v-for="item in items.slice(0, n)"
+        v-for="item in items.slice(0, number)"
         :key="item.id"
         :item_type="type"
         :subHeading="item.subHeading"
         :path="type + '/' + item.id"
         :itemHeading="item.heading"
         :status="item.status" />
-      <button to="">+{{ l - n }} More</button>
+      <button to="">+{{ totalLength - number }} More</button>
     </div>
     <div class="pt-2 border-t border-slate-200">
-      <span class="text-sm text-slate-700"
-        >14 Follow Ups, 7 New Patients, 3 Physicals</span
-      >
+      <span class="text-sm text-slate-700">{{ listMeta }}</span>
     </div>
   </div>
 </template>
@@ -36,15 +34,19 @@
       type: Object,
       required: true,
     },
-    l: {
+    totalLength: {
       type: Number,
       required: true,
     },
-    n: {
+    number: {
       type: Number,
       required: true,
     },
     type: {
+      type: String,
+      required: true,
+    },
+    listMeta: {
       type: String,
       required: true,
     },

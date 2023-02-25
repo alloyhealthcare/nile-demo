@@ -10,7 +10,7 @@
           itemHeading
         }}</span>
       </div>
-      <div v-if="item_type != 'message'">
+      <div v-if="item_type != 'messages'">
         <div class="flex flex-row space-x-3 leading-none items-center">
           <div
             class="text-xs font-semibold flex flex-row gap-x-1 text-slate-500 items-center">
@@ -45,7 +45,7 @@
             </div>
           </div>
           <div
-            v-if="item_type === 'order'"
+            v-if="item_type === 'orders'"
             class="flex flex-row space-x-3">
             <div
               class="text-xs"
