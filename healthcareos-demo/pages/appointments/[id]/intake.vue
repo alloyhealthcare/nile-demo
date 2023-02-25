@@ -1,7 +1,5 @@
 <template>
-  <NuxtLayout :name="'default'"
-    >{{ id }} {{ thisAppointment.patient.name }} Intake<NuxtPage
-  /></NuxtLayout>
+  <div>{{ id }} {{ thisAppointment.patient.name }} Intake<NuxtPage /></div>
 </template>
 
 <script setup>

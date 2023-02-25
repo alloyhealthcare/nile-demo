@@ -1,6 +1,6 @@
 <template>
   <SeoKit />
-  <NuxtLoadingIndicator />
+  <NuxtLoadingIndicator color="#1066EF" />
   <NuxtPage />
 </template>
 
