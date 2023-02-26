@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sidebar z-1 flex flex-col justify-between px-6 w-sidebar bg-white/25 pt-9 h-full shrink-0">
+    class="sidebar z-1 flex flex-col justify-between px-6 w-sidebar pt-9 h-full shrink-0">
     <div class="flex flex-col grow">
       <div class="mb-4">
         <h1 class="text-xl text-slate-700">{{ title }}</h1>

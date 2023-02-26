@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-1 p-6 rounded-3xl bg-slate-900/[.022]">
+  <div class="col-span-1 p-6 rounded-3xl bg-slate-900/[.022] w-[420px]">
     <div class="mb-5">
       <span class="block pb-1 text-xl text-slate-700 capitalize font-medium">{{
         type
