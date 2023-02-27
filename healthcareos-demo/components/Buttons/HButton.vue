@@ -1,6 +1,7 @@
 <template>
   <button
     class="py-2 px-4 text-sm leading-none rounded-xl transition-all duration-100 font-medium"
+    @click="handleClick"
     :class="{
       primary: variant.primary,
       default: variant.default,
@@ -23,6 +24,12 @@
       default: '',
     },
   });
+
+  const emit = defineEmits(['click']);
+
+  function handleClick() {
+    emit('click');
+  }
 
   const variant = {
     primary: props.variant === 'primary',

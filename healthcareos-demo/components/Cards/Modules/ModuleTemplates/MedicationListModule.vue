@@ -4,7 +4,8 @@
     :primaryButton="primaryButton"
     :secondaryButton="secondaryButton"
     :tertiaryButton="tertiaryButton"
-    class="h-144">
+    class="h-144"
+    v-if="showModule">
     <template #content>
       <div class="w-full">
         <div class="grid grid-cols-2 gap-2.5 w-full">
@@ -51,6 +52,10 @@
       primaryButton: Object,
       secondaryButton: Object,
       tertiaryButton: Object,
+      showModule: {
+        type: Boolean,
+        default: true,
+      },
     },
     emits: ['medicationSelected'],
   };

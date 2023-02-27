@@ -5,12 +5,12 @@
     :items="todayAppointments"
     :flowActive="isParentRoute">
     <template #flowContent>
-      <div class="flex flex-row grow w-full overflow-scroll">
+      <div class="flex flex-row grow w-full overflow-scroll gap-x-6">
         <component
-          v-for="(module, index) in allModules"
+          v-for="(module, id) in allModules"
           v-show="module.props.showModule"
           :is="module.component"
-          :key="index"
+          :key="id"
           v-bind="module.props"
           :patient="thisAppointment.patient"
           :encounter="thisAppointment" />
@@ -24,8 +24,16 @@
             <span class="font-semibold text-slate-500">Open...</span>
           </div>
           <div class="grid grid-cols-3 w-full mb-8 gap-4">
-            <h-button variant="buttonXL"> Last Appointment </h-button>
-            <h-button variant="buttonXL">Medications</h-button>
+            <h-button
+              variant="buttonXL"
+              @click="openModule, 2">
+              Last Appointment
+            </h-button>
+            <button
+              variant="buttonXL"
+              @click="openModule(2)">
+              Medications
+            </button>
             <h-button variant="buttonXL">Medical History</h-button>
             <h-button variant="buttonXL">Allergies</h-button>
             <h-button variant="buttonXL">Results</h-button>
@@ -41,26 +49,17 @@
           </div>
         </div>
       </div>
-      <div
-        class="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200 flex shadow-mg flex-row space-x-4 p-3">
-        <NuxtLink
-          :to="'/appointments/' + nextItem.encounter_id"
-          class="group space-x-4 py-5 px-6 rounded-xl border border-slate-200 hover:bg-slate-100 hover:text-slate-900"
-          v-if="nextItem">
-          <span class="font-semibold">Next</span>
-          <span>{{ nextItem.patient.name }}</span>
-          <font-awesome-icon
-            icon="fa-regular fa-arrow-down"
-            class="group-hover:animate-bounce" />
-        </NuxtLink>
-        <NuxtLink
-          class="py-5 px-6 border border-slate-200 rounded-xl"
-          v-if="prevItem">
-          <span class="font-semibold">Previous</span>
-          {{ prevItem.patient.name }}
-          <font-awesome-icon icon="fa-regular fa-arrow-up" />
-        </NuxtLink>
-      </div>
+      <space-toolbar
+        :nextItem="{
+          baseLink: '/appointments',
+          id: nextItem.encounter_id,
+          name: nextItem.patient.name,
+        }"
+        :prevItem="{
+          baseLink: '/appointments',
+          //id: prevItem.encounter_id,
+          //name: prevItem.patient.name,
+        }" />
     </template>
     <template #flowDetail><NuxtPage /></template>
   </NuxtLayout>
@@ -70,6 +69,7 @@
   import PatientOverviewModule from '~/components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue';
   import MedicationListModule from '~/components/Cards/Modules/ModuleTemplates/MedicationListModule.vue';
   import MedicationDetailModule from '~~/components/Cards/Modules/ModuleTemplates/MedicationDetailModule.vue';
+  import SpaceToolbar from '~/components/Toolbars/SpaceToolbar.vue';
   import HButton from '~/components/Buttons/HButton.vue';
 
   const props = [
@@ -182,7 +182,7 @@
       type: 'medication-list',
       component: MedicationListModule,
       props: {
-        showModule: false,
+        showModule: null,
         type: 'Follow Up',
         medicationList: patientMedList,
         moduleInfo: {
@@ -209,6 +209,8 @@
 
   const medicationModules = patientMedList.map((medication) => ({
     component: MedicationDetailModule,
+    id: '1' + medication.medication_id,
+    type: 'medication-detail',
     props: {
       showModule: false,
       medicationItem: {
@@ -241,6 +243,16 @@
 
   const allModules = patientModules.concat(medicationModules);
   //const chooseMedication = (modules[2] = !showModule);
+
+  function openModule(id) {
+    allModules.forEach((module) => {
+      if (module.id == id) {
+        module.props.showModule = true;
+      } else {
+        module.props.showModule = false;
+      }
+    });
+  }
 
   // Add computed for next and previous appointments
   const nextItem = computed(() => {

@@ -7,7 +7,8 @@
       :primaryButton="primaryButton"
       :secondaryButton="secondaryButton"
       :tertiaryButton="tertiaryButton"
-      class="h-144">
+      class="h-144"
+      v-if="showModule">
       <template #content>
         <div class="w-full">
           <div class="w-full flex flex-row items-center justify-between mb-6">
